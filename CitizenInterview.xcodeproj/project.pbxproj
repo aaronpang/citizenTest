@@ -14,6 +14,8 @@
 		E3698F852A985F8F0079B60E /* CitizenInterviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3698F842A985F8F0079B60E /* CitizenInterviewTests.swift */; };
 		E3698F8F2A985F8F0079B60E /* CitizenInterviewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3698F8E2A985F8F0079B60E /* CitizenInterviewUITests.swift */; };
 		E3698F912A985F8F0079B60E /* CitizenInterviewUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3698F902A985F8F0079B60E /* CitizenInterviewUITestsLaunchTests.swift */; };
+		E3698FA02A9DADC40079B60E /* Questions.json in Resources */ = {isa = PBXBuildFile; fileRef = E3698F9E2A9C0B030079B60E /* Questions.json */; };
+		E3698FA22A9DB0D20079B60E /* QuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3698FA12A9DB0D20079B60E /* QuestionModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		E3698F8A2A985F8F0079B60E /* CitizenInterviewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CitizenInterviewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3698F8E2A985F8F0079B60E /* CitizenInterviewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizenInterviewUITests.swift; sourceTree = "<group>"; };
 		E3698F902A985F8F0079B60E /* CitizenInterviewUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizenInterviewUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E3698F9E2A9C0B030079B60E /* Questions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Questions.json; sourceTree = "<group>"; };
+		E3698FA12A9DB0D20079B60E /* QuestionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,10 +98,12 @@
 		E3698F722A985F8E0079B60E /* CitizenInterview */ = {
 			isa = PBXGroup;
 			children = (
+				E3698F9E2A9C0B030079B60E /* Questions.json */,
 				E3698F732A985F8E0079B60E /* CitizenInterviewApp.swift */,
 				E3698F752A985F8E0079B60E /* ContentView.swift */,
 				E3698F772A985F8E0079B60E /* Assets.xcassets */,
 				E3698F792A985F8E0079B60E /* Preview Content */,
+				E3698FA12A9DB0D20079B60E /* QuestionModel.swift */,
 			);
 			path = CitizenInterview;
 			sourceTree = "<group>";
@@ -232,6 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3698F7B2A985F8E0079B60E /* Preview Assets.xcassets in Resources */,
+				E3698FA02A9DADC40079B60E /* Questions.json in Resources */,
 				E3698F782A985F8E0079B60E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,6 +264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3698FA22A9DB0D20079B60E /* QuestionModel.swift in Sources */,
 				E3698F762A985F8E0079B60E /* ContentView.swift in Sources */,
 				E3698F742A985F8E0079B60E /* CitizenInterviewApp.swift in Sources */,
 			);
