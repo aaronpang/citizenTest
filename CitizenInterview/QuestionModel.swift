@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct QuestionModel : Decodable{
-    let question : String
-    let answers : Array<String>
+struct QuestionModel: Decodable {
+    let question: String
+    let answers: [String]
 }
