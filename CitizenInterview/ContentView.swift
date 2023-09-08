@@ -39,37 +39,46 @@ struct ContentView: View {
                 Text(question).padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
                 if showAnswer {
                     Text(answer)
-                    Button("Next Question") {
-                        questionsAlreadySeen.append(questionCounter)
-                        if shouldShuffle {
-                            if questionsAlreadySeen.count == questions.count {
-                                print("YOU WIN!")
-                                return
-                            } else {
-                                while questionsAlreadySeen.contains(questionCounter) {
-                                    questionCounter = Int(arc4random_uniform(UInt32(questions.count)))
-                                }
-                            }
-                        } else {
-                            questionCounter += 1
-                        }
-                        showAnswer.toggle()
-                        if questionCounter >= questions.count {
-                            questionCounter = 0
-                        }
-                        question = questions[questionCounter].question
-
-                        // Update the answer
-                        answer = parseAnswersIntoString(answers: questions[questionCounter].answers)
-                    }
-                } else {
-                    Button("Show Answer") {
-                        showAnswer.toggle()
-                    }
                 }
+                Button {
+                    showAnswer.toggle()
+
+                } label: {
+                    Text(showAnswer ? "Hide Answer" : "Show Answer")
+                        .frame( maxWidth: .infinity, minHeight: 40)
+                }
+                .buttonStyle(.borderedProminent)
+                .frame(maxHeight: .infinity, alignment: .bottom)
+                Button {
+                    showAnswer = false
+                    questionsAlreadySeen.append(questionCounter)
+                    if shouldShuffle {
+                        if questionsAlreadySeen.count >= questions.count {
+                            print("YOU WIN!")
+                            questionsAlreadySeen = []
+                        } else {
+                            while questionsAlreadySeen.contains(questionCounter) {
+                                questionCounter = Int(arc4random_uniform(UInt32(questions.count)))
+                            }
+                        }
+                    } else {
+                        questionCounter += 1
+                    }
+                    if questionCounter >= questions.count {
+                        questionCounter = 0
+                    }
+                    question = questions[questionCounter].question
+
+                    // Update the answer
+                    answer = parseAnswersIntoString(answers: questions[questionCounter].answers)
+                } label: {
+                    Text("Next Question")
+                        .frame(maxWidth: .infinity, minHeight: 30)
+                }
+                .buttonStyle(.borderless)
+                .frame(alignment: .bottom)
             }
             .padding()
-            .background(Color.white)
             .frame(maxWidth: .infinity, // Full Screen Width
                    maxHeight: .infinity, // Full Screen Height
                    alignment: .topLeading)
