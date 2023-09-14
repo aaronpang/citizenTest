@@ -10,4 +10,5 @@ import Foundation
 struct QuestionModel: Decodable {
     let question: String
     let answers: [String]
+    let question_id : Int
 }
