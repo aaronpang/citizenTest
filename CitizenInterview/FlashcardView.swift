@@ -17,8 +17,10 @@ struct FlashcardView: View {
     @State private var questionsSeenOrdered: [Int] = []
 
     @State private var questions: [QuestionModel] = []
+    @Binding var answerModel: DynamicAnswerResultsModel?
 
-    init() {
+    init(answerModel: Binding<DynamicAnswerResultsModel?>) {
+        self._answerModel = answerModel
         self._questions = State(initialValue: QuestionManager.getQuestionOrderedByScore())
         let initialQuestion = questions[questionCounter]
         self._question = State(initialValue: initialQuestion.question)
@@ -99,9 +101,32 @@ struct FlashcardView: View {
         var answerString = ""
         let appendHyphen = answers.count > 1
         answers.forEach { answer in
-            answerString.append((appendHyphen ? " - " : "") + answer.localizedCapitalized + "\n")
+            // Convert answer tokens from dynamic answer model
+            let convertedAnswer = convertAnswerTokens(answer: answer)
+            // If answer is a certain key then pull the dynamic data that way
+            answerString.append((appendHyphen ? " - " : "") + convertedAnswer.localizedCapitalized + "\n")
         }
         return answerString
+    }
+
+//    let senators: [String]
+//    let representatives: [String]
+
+    private func convertAnswerTokens(answer: String) -> String {
+        guard let answerModel else { return answer }
+        let newAnswer = answer
+            .replacingOccurrences(of: "$president", with: answerModel.president)
+            .replacingOccurrences(of: "$vice_president", with: answerModel.vicePresident)
+            .replacingOccurrences(of: "$party_of_president", with: answerModel.presidentPoliticalParty)
+            .replacingOccurrences(of: "$governor", with: answerModel.governor)
+            .replacingOccurrences(of: "$capital", with: answerModel.capital)
+            .replacingOccurrences(of: "$speaker_of_house", with: answerModel.speakerOfHouse)
+            .replacingOccurrences(of: "$number_supreme_court_justices", with: String(answerModel.numberOfSupremeCourtJustices))
+            .replacingOccurrences(of: "$chief_justice", with: String(answerModel.chiefJustice))
+        if newAnswer.count <= 0 {
+            newAnswer = "Unable to "
+        }
+        return newAnswer
     }
 
     func updateQuestionAndAnswer() {

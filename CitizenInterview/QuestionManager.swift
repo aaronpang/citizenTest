@@ -28,7 +28,7 @@ class QuestionManager {
         }
         guard let score = questions[questionID] else { return }
         questions[questionID] = score + scoreDifference
-        // Convert questions to NSNumber : NSNumber
+        // Convert questions to NSString : NSNumber
         var storableQuestions: [NSString: NSNumber] = [:]
         for question in questions {
             storableQuestions[NSString(format: "%d", question.key)] = NSNumber(value: question.value)

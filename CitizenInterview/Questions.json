@@ -137,12 +137,12 @@
   {
     "question_id": 28,
     "question": "What is the name of the President of the United States now?",
-    "answers": ["Visit uscis.gov/citizenship/testupdates for the name of the President of the United States."]
+    "answers": ["$president"]
   },
   {
     "question_id": 29,
     "question": "What is the name of the Vice President of the United States now?",
-    "answers": ["Visit uscis.gov/citizenship/testupdates for the name of the Vice President of the United States."]
+    "answers": ["$vice_president"]
   },
   {
     "question_id": 30,
@@ -192,12 +192,12 @@
   {
     "question_id": 39,
     "question": "How many justices are on the Supreme Court?",
-    "answers": ["Visit uscis.gov/citizenship/testupdates for the number of justices on the Supreme Court."]
+    "answers": ["$number_supreme_court_justices"]
   },
   {
     "question_id": 40,
     "question": "Who is the Chief Justice of the United States now?",
-    "answers": ["Visit uscis.gov/citizenship/testupdates for the name of the Chief Justice of the United States."]
+    "answers": ["$chief_justice"]
   },
   {
     "question_id": 41,
@@ -212,12 +212,12 @@
   {
     "question_id": 43,
     "question": "Who is the Governor of your state now?",
-    "answers": ["Answers will vary. [District of Columbia residents should answer that D.C. does not have a Governor.]"]
+    "answers": ["$governor"]
   },
   {
     "question_id": 44,
     "question": "What is the capital of your state?",
-    "answers": ["Answers will vary. [District of Columbia residents should answer that D.C. is not a state and does not have a capital. Residents of U.S. territories should name the capital of the territory.]"]
+    "answers": ["$capital"]
   },
   {
     "question_id": 45,
@@ -227,12 +227,12 @@
   {
     "question_id": 46,
     "question": "What is the political party of the President now?",
-    "answers": ["Visit uscis.gov/citizenship/testupdates for the political party of the President."]
+    "answers": ["$party_of_president"]
   },
   {
     "question_id": 47,
     "question": "What is the name of the Speaker of the House of Representatives now?",
-    "answers": ["Visit uscis.gov/citizenship/testupdates for the name of the Speaker of the House of Representatives."]
+    "answers": ["$speaker_of_house"]
   },
   {
     "question_id": 48,
