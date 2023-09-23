@@ -44,6 +44,7 @@ struct MainMenuView: View {
     @State private var selectedState: AmericanState = .alabama
     @State private var isAbove65 = false
     @State private var answerModel: DynamicAnswerResultsModel?
+    private var address: String = "100 sendera lane fort worth"
 
     enum AmericanState: String, CaseIterable, Identifiable {
         case alabama, alaska, arizona, arkansas, california, colorado, connecticut, delaware, florida, georgia, hawaii, idaho, illinois, indiana, iowa, kansas, kentucky, louisiana, maine, maryland, massachusetts, michigan, minnesota, mississippi, missouri, montana, nebraska, nevada, new_hampshire, new_jersey, new_mexico, new_york, north_carolina, north_dakota, ohio, oklahoma, oregon, pennsylvania, rhode_island, south_carolina, south_dakota, tennessee, texas, utah, vermont, virginia, washington, west_virginia, wisconsin, wyoming
@@ -55,15 +56,7 @@ struct MainMenuView: View {
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
-                Text("Pick Your State")
-                Picker("Pick Your State", selection: $selectedState, content: {
-                    ForEach(AmericanState.allCases) { americanState in
-                        Text(americanState.rawValue.capitalized.replacingOccurrences(of: "_", with: " "))
-                    }
-                })
-                .pickerStyle(.wheel)
-                .onChange(of: selectedState) { _ in
-                }
+                Text("W")
                 Toggle("Above the age of 65?", isOn: $isAbove65)
                     .toggleStyle(.switch)
                     .frame(alignment: .bottom).padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
@@ -106,7 +99,7 @@ struct MainMenuView: View {
         // Check if the data is cached with a refresh date of < 2 months, then fetch the info
         var urlComponents = URLComponents(string: "https://www.googleapis.com/civicinfo/v2/representatives")!
         urlComponents.queryItems = [
-            URLQueryItem(name: "address", value: "100 sendera lane fort worth"),
+            URLQueryItem(name: "address", value: address),
             URLQueryItem(name: "key", value: "AIzaSyCOGbH_RzRwROVMroT7EFklR9sVpIj43Y4")
         ]
         let url = urlComponents.url!
@@ -161,11 +154,15 @@ struct MainMenuView: View {
     }
 
     func officalNames(officials: [Official], role: OfficialRole) -> [String] {
-        return officials.filter {
+        let names = officials.filter {
             $0.role == role
         }.map { official in
             official.name
         }
+        if names.count <= 0 {
+            return [String(format: "There are no %@s for the address: %@", role.rawValue, address)]
+        }
+        return names
     }
 
     func officialRoleFromRolesAndLevels(roles: [String], levels: [String]) -> OfficialRole {

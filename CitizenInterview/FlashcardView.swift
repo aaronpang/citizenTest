@@ -114,7 +114,7 @@ struct FlashcardView: View {
 
     private func convertAnswerTokens(answer: String) -> String {
         guard let answerModel else { return answer }
-        let newAnswer = answer
+        var newAnswer = answer
             .replacingOccurrences(of: "$president", with: answerModel.president)
             .replacingOccurrences(of: "$vice_president", with: answerModel.vicePresident)
             .replacingOccurrences(of: "$party_of_president", with: answerModel.presidentPoliticalParty)
@@ -123,8 +123,20 @@ struct FlashcardView: View {
             .replacingOccurrences(of: "$speaker_of_house", with: answerModel.speakerOfHouse)
             .replacingOccurrences(of: "$number_supreme_court_justices", with: String(answerModel.numberOfSupremeCourtJustices))
             .replacingOccurrences(of: "$chief_justice", with: String(answerModel.chiefJustice))
-        if newAnswer.count <= 0 {
-            newAnswer = "Unable to "
+        if newAnswer == "$senators" {
+            var senatorString = ""
+            let appendHyphen = answerModel.senators.count > 1
+            answerModel.senators.forEach { senator in
+                senatorString.append((appendHyphen ? " - " : "") + senator.localizedCapitalized + "\n")
+            }
+            newAnswer = senatorString
+        } else if newAnswer == "$representatives" {
+            var representativeString = ""
+            let appendHyphen = answerModel.senators.count > 1
+            answerModel.representatives.forEach { representative in
+                representativeString.append((appendHyphen ? " - " : "") + representative.localizedCapitalized + "\n")
+            }
+            newAnswer = representativeString
         }
         return newAnswer
     }
