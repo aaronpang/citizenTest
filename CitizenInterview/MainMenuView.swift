@@ -5,6 +5,7 @@
 //  Created by Aaron Pang on 8/25/23.
 //
 
+import CoreLocation
 import SwiftUI
 
 enum OfficialRole: String, Codable {
@@ -43,7 +44,11 @@ struct MainMenuView: View {
     @State private var isLoading: Bool = false
     @State private var selectedState: AmericanState = .alabama
     @State private var isAbove65 = false
+    @State private var locationEnabled = false
     @State private var answerModel: DynamicAnswerResultsModel?
+    private let locationDelegateHandler = MainMenuViewDelegateHandler()
+    private let locationManager = CLLocationManager()
+
     private var address: String = "100 sendera lane fort worth"
 
     enum AmericanState: String, CaseIterable, Identifiable {
@@ -51,12 +56,44 @@ struct MainMenuView: View {
         var id: Self { self }
     }
 
-    init() {}
+    init() {
+        // Check if location is enabled, if it is, then cool!
+        switch locationManager.authorizationStatus {
+        case .notDetermined: break
+        // Show authorization button
+        case .denied: break
+        case .restricted: break
+        // Show picker and button to screen to allow authorization
+        case .authorizedAlways: break
+        case .authorizedWhenInUse: break
+            // Sweet do nothing
+        }
+        // If location is not enabled, then show picker where we will do the fetching later and a dialog more info button to change settings and allow data fetching
+//        locationEnabled = UserDefaults.standard.bool(forKey: "location_enabled")
+    }
 
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
-                Text("W")
+                Text("Please accept the location access so we can provide to you the most accurate information for your studies")
+                Toggle("Location Enabled", isOn: $locationEnabled)
+                    .toggleStyle(.switch)
+                    .frame(alignment: .bottom).padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
+                    .tint(Color(UIColor.systemBlue))
+                    .onChange(of: locationEnabled) { _ in
+                        let locationManager = CLLocationManager()
+                        locationManager.delegate = locationDelegateHandler
+                    }
+
+//                Picker("Pick Your State", selection: $selectedState, content: {
+//                    ForEach(AmericanState.allCases) { americanState in
+//                        Text(americanState.rawValue.capitalized.replacingOccurrences(of: "_", with: " "))
+//                    }
+//                })
+//                .pickerStyle(.wheel)
+//                .onChange(of: selectedState) { _ in
+//                }
+                // If the user declines the location, then show a picker for them to pick the state
                 Toggle("Above the age of 65?", isOn: $isAbove65)
                     .toggleStyle(.switch)
                     .frame(alignment: .bottom).padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
@@ -144,6 +181,7 @@ struct MainMenuView: View {
                                                         speakerOfHouse: "Kevin McCarthy",
                                                         numberOfSupremeCourtJustices: 9,
                                                         chiefJustice: "John Roberts") // Don't hard code these
+
                 completion(answers, nil)
             } catch {
                 print(error)
@@ -185,10 +223,10 @@ struct MainMenuView: View {
         }
         return .none
     }
+}
 
-    func getPresidentName(officials: [Official]) {
-        for official in officials {
-//            if official.party
-        }
-    }
+class MainMenuViewDelegateHandler: NSObject, CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {}
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {}
 }
