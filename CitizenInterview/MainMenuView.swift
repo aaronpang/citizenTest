@@ -8,12 +8,6 @@
 import CoreLocation
 import SwiftUI
 
-enum LocationAuthorizationViewState {
-    case showAddress
-    case showRequestButton
-    case showStatePicker
-}
-
 enum OfficialRole: String, Codable {
     case none
     case president
@@ -53,7 +47,6 @@ struct MainMenuView: View {
     @State private var locationEnabled = false
     @State private var answerModel: DynamicAnswerResultsModel?
     @StateObject var locationManager = LocationManager()
-    @State private var locationAuthorizationViewState = LocationAuthorizationViewState.showRequestButton
 
     enum AmericanState: String, CaseIterable, Identifiable {
         case alabama, alaska, arizona, arkansas, california, colorado, connecticut, delaware, florida, georgia, hawaii, idaho, illinois, indiana, iowa, kansas, kentucky, louisiana, maine, maryland, massachusetts, michigan, minnesota, mississippi, missouri, montana, nebraska, nevada, new_hampshire, new_jersey, new_mexico, new_york, north_carolina, north_dakota, ohio, oklahoma, oregon, pennsylvania, rhode_island, south_carolina, south_dakota, tennessee, texas, utah, vermont, virginia, washington, west_virginia, wisconsin, wyoming
@@ -67,26 +60,24 @@ struct MainMenuView: View {
                     // Check if location is enabled on appear
                     // Depending on permissions, show different UIs (request button, address, or state picker)
                     switch locationManager.manager.authorizationStatus {
-                    case .notDetermined: locationAuthorizationViewState = .showRequestButton
+                    case .notDetermined: break
                     // Show authorization button
-                    case .denied: locationAuthorizationViewState = .showStatePicker
-                    case .restricted: locationAuthorizationViewState = .showStatePicker
+                    case .denied: break
+                    case .restricted: break
                     // Show picker and button to screen to allow authorization
                     case .authorizedAlways:
-                        locationAuthorizationViewState = .showAddress
                         locationManager.manager.requestLocation()
 
                     case .authorizedWhenInUse:
-                        locationAuthorizationViewState = .showAddress
                         // Sweet get the user location and see if it needs to be stored
                         locationManager.manager.requestLocation()
                     @unknown default:
                         break
                     }
                 }
-                if locationAuthorizationViewState == .showAddress {
-                    Text(String(format:"The address we are using is:\n%@", locationManager.location))
-                } else if locationAuthorizationViewState == .showRequestButton {
+                if locationManager.authorization == .authorizedAlways || locationManager.authorization == .authorizedWhenInUse {
+                    Text(String(format: "The address we are using is:\n%@", locationManager.location))
+                } else if locationManager.authorization == .notDetermined {
                     Toggle("Location Enabled", isOn: $locationEnabled)
                         .toggleStyle(.switch)
                         .frame(alignment: .bottom).padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
@@ -239,6 +230,7 @@ struct MainMenuView: View {
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var location: String = ""
+    @Published var authorization: CLAuthorizationStatus = .notDetermined
 
     var manager = {
         let manager = CLLocationManager()
@@ -248,6 +240,10 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     override init() {
         super.init()
         manager.delegate = self
+    }
+
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        authorization = manager.authorizationStatus
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
