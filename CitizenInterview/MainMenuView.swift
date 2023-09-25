@@ -142,7 +142,22 @@ struct MainMenuView: View {
             URLQueryItem(name: "key", value: "AIzaSyCOGbH_RzRwROVMroT7EFklR9sVpIj43Y4")
         ]
         let url = urlComponents.url!
+        let zipCode = locationManager.zipCode
+        let userDefaults = UserDefaults.standard
 
+        // Check we have an answer model stored within the device that is not stale < 2 months
+        if let answerModel = userDefaults.value(forKey: "dynamic_answers_for_zip_" + zipCode) as? Data {
+            let decoder = JSONDecoder()
+            if let loadedAnswerModelStore = try? decoder.decode(DynamicAnswerResultsModelStore.self, from: answerModel) {
+                let time = Int(NSDate().timeIntervalSince1970)
+                if time - loadedAnswerModelStore.timeStored < 5256000 { // Greater than 2 months
+                    completion(loadedAnswerModelStore.answers, nil)
+                    return
+                }
+            }
+        }
+
+        // If we don't have a cached result or if the info is state for the zip code then do a fetch!
         let task = URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data else { return }
             do {
@@ -186,6 +201,13 @@ struct MainMenuView: View {
                                                         speakerOfHouse: "Kevin McCarthy",
                                                         numberOfSupremeCourtJustices: 9,
                                                         chiefJustice: "John Roberts") // Don't hard code these
+                // Cache the information per zip code with a timeout of 2 months so we don't fetch every time the user taps on Begin Quiz
+                let time = Int(NSDate().timeIntervalSince1970)
+                let modelStore = DynamicAnswerResultsModelStore(answers: answers, timeStored: time)
+                let encoder = JSONEncoder()
+                if let encoded = try? encoder.encode(modelStore) {
+                    userDefaults.setValue(encoded, forKey: "dynamic_answers_for_zip_" + locationManager.zipCode)
+                }
 
                 completion(answers, nil)
             } catch {
@@ -233,6 +255,7 @@ struct MainMenuView: View {
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var location: String = ""
     @Published var state: String = ""
+    @Published var zipCode: String = ""
     @Published var authorization: CLAuthorizationStatus = .notDetermined
 
     var manager = {
@@ -273,6 +296,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 
             // 4
             self.state = state
+            self.zipCode = zipCode
             self.location = "\(streetNumber) \(streetName) \n \(city), \(state) \(zipCode)"
         }
     }

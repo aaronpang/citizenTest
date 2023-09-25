@@ -7,7 +7,12 @@
 
 import Foundation
 
-struct DynamicAnswerResultsModel {
+struct DynamicAnswerResultsModelStore: Codable {
+    let answers: DynamicAnswerResultsModel
+    let timeStored: Int
+}
+
+struct DynamicAnswerResultsModel: Codable {
     let senators: [String]
     let representatives: [String]
 
