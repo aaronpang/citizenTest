@@ -95,6 +95,7 @@ struct MainMenuView: View {
                                 print(error)
                             } else {
                                 answerModel = dynamicAnswers
+                                showFlashCards = true
                             }
                         }
                     } label: {
