@@ -10,6 +10,7 @@
 		E3015DE12AACF26600D574BD /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3015DE02AACF26600D574BD /* MainMenuView.swift */; };
 		E3015DE32AB0349E00D574BD /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3015DE22AB0349E00D574BD /* JSONParser.swift */; };
 		E3015DE52AB2B14800D574BD /* QuestionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3015DE42AB2B14800D574BD /* QuestionManager.swift */; };
+		E35BE0D42AC1325500C6FA84 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35BE0D32AC1325500C6FA84 /* InfoView.swift */; };
 		E3698F742A985F8E0079B60E /* CitizenInterviewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3698F732A985F8E0079B60E /* CitizenInterviewApp.swift */; };
 		E3698F762A985F8E0079B60E /* FlashcardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3698F752A985F8E0079B60E /* FlashcardView.swift */; };
 		E3698F782A985F8E0079B60E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3698F772A985F8E0079B60E /* Assets.xcassets */; };
@@ -45,6 +46,7 @@
 		E3015DE02AACF26600D574BD /* MainMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		E3015DE22AB0349E00D574BD /* JSONParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
 		E3015DE42AB2B14800D574BD /* QuestionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionManager.swift; sourceTree = "<group>"; };
+		E35BE0D32AC1325500C6FA84 /* InfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		E3698F702A985F8E0079B60E /* CitizenInterview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CitizenInterview.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3698F732A985F8E0079B60E /* CitizenInterviewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizenInterviewApp.swift; sourceTree = "<group>"; };
 		E3698F752A985F8E0079B60E /* FlashcardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashcardView.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				E3698F732A985F8E0079B60E /* CitizenInterviewApp.swift */,
 				E3698F752A985F8E0079B60E /* FlashcardView.swift */,
 				E395A3122ABE7C4F009E67C4 /* SomeView.swift */,
+				E35BE0D32AC1325500C6FA84 /* InfoView.swift */,
 				E3015DE42AB2B14800D574BD /* QuestionManager.swift */,
 				E3015DE02AACF26600D574BD /* MainMenuView.swift */,
 				E3015DE22AB0349E00D574BD /* JSONParser.swift */,
@@ -298,6 +301,7 @@
 				E3015DE12AACF26600D574BD /* MainMenuView.swift in Sources */,
 				E3698F762A985F8E0079B60E /* FlashcardView.swift in Sources */,
 				E3698F742A985F8E0079B60E /* CitizenInterviewApp.swift in Sources */,
+				E35BE0D42AC1325500C6FA84 /* InfoView.swift in Sources */,
 				E3015DE52AB2B14800D574BD /* QuestionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

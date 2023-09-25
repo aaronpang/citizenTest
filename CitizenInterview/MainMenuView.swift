@@ -40,7 +40,9 @@ struct RepresentativesResult: Decodable {
 }
 
 struct MainMenuView: View {
-    @State private var selection: Bool = false
+    @State private var showFlashCards: Bool = false
+    @State private var showInfo: Bool = false
+    
     @State private var isLoading: Bool = false
     @State private var selectedState: AmericanState = .alabama
     @State private var isAbove65 = false
@@ -56,27 +58,10 @@ struct MainMenuView: View {
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
-                Text("Please accept the location access so we can provide to you the most accurate information for your studies").onAppear {
-                    // Check if location is enabled on appear
-                    // Depending on permissions, show different UIs (request button, address, or state picker)
-                    switch locationManager.manager.authorizationStatus {
-                    case .notDetermined: break
-                    // Show authorization button
-                    case .denied: break
-                    case .restricted: break
-                    // Show picker and button to screen to allow authorization
-                    case .authorizedAlways:
-                        locationManager.manager.requestLocation()
-                    case .authorizedWhenInUse:
-                        // Sweet get the user location and see if it needs to be stored
-                        locationManager.manager.requestLocation()
-                    @unknown default:
-                        break
-                    }
-                }
                 if locationManager.authorization == .authorizedAlways || locationManager.authorization == .authorizedWhenInUse {
                     Text(String(format: "The address we are using is:\n%@", locationManager.location))
                 } else if locationManager.authorization == .notDetermined {
+                    Text("Please accept the location access so we can provide to you the most accurate information for your studies")
                     Toggle("Location Enabled", isOn: $locationEnabled)
                         .toggleStyle(.switch)
                         .frame(alignment: .bottom).padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
@@ -100,37 +85,67 @@ struct MainMenuView: View {
                     .toggleStyle(.switch)
                     .frame(alignment: .bottom).padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
                     .tint(Color(UIColor.systemBlue))
-                Button {
-                    // Fetch the info on the state-specific questions
-                    isLoading = true
-                    fetchData { dynamicAnswers, error in
-                        isLoading = false
-                        if let error = error {
-                            print(error)
+                NavigationLink(destination: FlashcardView(answerModel: $answerModel)) {
+                    Button {
+                        // Fetch the info on the state-specific questions
+                        isLoading = true
+                        fetchData { dynamicAnswers, error in
+                            isLoading = false
+                            if let error = error {
+                                print(error)
+                            } else {
+                                answerModel = dynamicAnswers
+                            }
+                        }
+                    } label: {
+                        if isLoading {
+                            ProgressView().frame(maxWidth: .infinity, minHeight: 40)
+                                .tint(.white)
                         } else {
-                            answerModel = dynamicAnswers
-                            selection = true
+                            Text("Begin Quiz")
+                                .frame(maxWidth: .infinity, minHeight: 40)
                         }
                     }
-                } label: {
-                    if isLoading {
-                        ProgressView().frame(maxWidth: .infinity, minHeight: 40)
-                            .tint(.white)
-                    } else {
-                        Text("Begin Quiz")
-                            .frame(maxWidth: .infinity, minHeight: 40)
-                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(Color(UIColor.systemBlue.withAlphaComponent(isLoading ? 0.8 : 1.0)))
+                    .frame(maxHeight: .infinity, alignment: .bottom)
+                    .padding()
                 }
-                .buttonStyle(.borderedProminent)
-                .tint(Color(UIColor.systemBlue.withAlphaComponent(isLoading ? 0.8 : 1.0)))
-                .frame(maxHeight: .infinity, alignment: .bottom)
-                .padding()
             }
             .navigationBarTitle(Text("US Citizenship Prep"))
-            .navigationDestination(isPresented: $selection) {
+            .navigationDestination(isPresented: $showFlashCards) {
                 FlashcardView(answerModel: $answerModel)
             }
+            .navigationDestination(isPresented: $showInfo) {
+                InfoView()
+            }
+            .toolbar {
+                Button("Settings") {
+                    print("About tapped!")
+                }
+                Button("Info") {
+                    showInfo = true
+                }
+            }
             .padding()
+            .onAppear {
+                // Check if location is enabled on appear
+                // Depending on permissions, show different UIs (request button, address, or state picker)
+                switch locationManager.manager.authorizationStatus {
+                case .notDetermined: break
+                // Show authorization button
+                case .denied: break
+                case .restricted: break
+                // Show picker and button to screen to allow authorization
+                case .authorizedAlways:
+                    locationManager.manager.requestLocation()
+                case .authorizedWhenInUse:
+                    // Sweet get the user location and see if it needs to be stored
+                    locationManager.manager.requestLocation()
+                @unknown default:
+                    break
+                }
+            }
         }
     }
 
@@ -284,8 +299,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 
             // 2
             guard let placemark = placemarks?.first else { return }
-            print(placemark)
-            // Geary & Powell, Geary & Powell, 299 Geary St, San Francisco, CA 94102, United States @ <+37.78735352,-122.40822700> +/- 100.00m, region CLCircularRegion (identifier:'<+37.78735636,-122.40822737> radius 70.65', center:<+37.78735636,-122.40822737>, radius:70.65m)
 
             // 3
             guard let streetNumber = placemark.subThoroughfare else { return }
