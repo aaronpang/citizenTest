@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "723465C1-E946-4AD2-BDA8-D3BBC919E013"
+            uuid = "D822FDA4-0C86-4AD2-9C3C-2F78DC3F0F4B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CitizenInterview/MainMenuView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "246"
-            endingLineNumber = "246"
-            landmarkName = "locationManagerDidChangeAuthorization(_:)"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
+            landmarkName = "fetchData(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

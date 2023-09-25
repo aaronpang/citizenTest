@@ -18,7 +18,7 @@ class QuestionManager {
             }
         } else {
             // If it was never initialized, initialize the array
-            if let questionModels = QuestionJSONParser.parse(forName: "Questions") {
+            if let questionModels = JSONParser.parseQuestionsJSON() {
                 var questionsToSave: [Int: Int] = [:]
                 for questionModel in questionModels {
                     questionsToSave[questionModel.question_id] = 0
@@ -38,7 +38,7 @@ class QuestionManager {
 
     class func getQuestionOrderedByScore() -> [QuestionModel] {
         // Parse the questions and get them ordered based on their score
-        let questions = QuestionJSONParser.parse(forName: "Questions")!
+        let questions = JSONParser.parseQuestionsJSON()!
         // Create dictioanry of question_id : questions
         var questionIDToQuestionModel: [Int: QuestionModel] = [:]
         for question in questions {

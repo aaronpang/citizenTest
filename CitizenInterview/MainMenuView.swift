@@ -67,7 +67,6 @@ struct MainMenuView: View {
                     // Show picker and button to screen to allow authorization
                     case .authorizedAlways:
                         locationManager.manager.requestLocation()
-
                     case .authorizedWhenInUse:
                         // Sweet get the user location and see if it needs to be stored
                         locationManager.manager.requestLocation()
@@ -174,13 +173,16 @@ struct MainMenuView: View {
                     }.map { official in
                         official.party
                     }[0]
+                let stateCapitals = JSONParser.parseStateCapitals() ?? [:]
+                let state = locationManager.state
+                let capital = stateCapitals[state] ?? String(format: "Couldn't find capital for state %@. Please search this up online.", state)
                 let answers = DynamicAnswerResultsModel(senators: senators,
                                                         representatives: representatives,
                                                         president: president,
                                                         presidentPoliticalParty: presidentPoliticalParty,
                                                         vicePresident: vicePresident,
                                                         governor: governor,
-                                                        capital: "",
+                                                        capital: capital,
                                                         speakerOfHouse: "Kevin McCarthy",
                                                         numberOfSupremeCourtJustices: 9,
                                                         chiefJustice: "John Roberts") // Don't hard code these
@@ -230,6 +232,7 @@ struct MainMenuView: View {
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var location: String = ""
+    @Published var state: String = ""
     @Published var authorization: CLAuthorizationStatus = .notDetermined
 
     var manager = {
@@ -247,7 +250,31 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        location = "3 Court Square West, NY"
+        let location = locations[0]
+        let latitude = location.coordinate.latitude
+        let longitude = location.coordinate.longitude
+        CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: latitude, longitude: longitude)) { [weak self] placemarks, error in
+            guard let self else { return }
+            if let error = error {
+                print(error)
+            }
+
+            // 2
+            guard let placemark = placemarks?.first else { return }
+            print(placemark)
+            // Geary & Powell, Geary & Powell, 299 Geary St, San Francisco, CA 94102, United States @ <+37.78735352,-122.40822700> +/- 100.00m, region CLCircularRegion (identifier:'<+37.78735636,-122.40822737> radius 70.65', center:<+37.78735636,-122.40822737>, radius:70.65m)
+
+            // 3
+            guard let streetNumber = placemark.subThoroughfare else { return }
+            guard let streetName = placemark.thoroughfare else { return }
+            guard let city = placemark.locality else { return }
+            guard let state = placemark.administrativeArea else { return }
+            guard let zipCode = placemark.postalCode else { return }
+
+            // 4
+            self.state = state
+            self.location = "\(streetNumber) \(streetName) \n \(city), \(state) \(zipCode)"
+        }
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {}
