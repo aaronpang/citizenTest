@@ -36,8 +36,9 @@ class QuestionManager {
         userDefaults.set(storableQuestions, forKey: "questions")
     }
 
-    class func getQuestionOrderedByScore() -> [QuestionModel] {
+    class func getQuestionOrderedByScore(showOnly65AboveQuestions: Bool) -> [QuestionModel] {
         // Parse the questions and get them ordered based on their score
+        var sortedQuestionToReturn: [QuestionModel] = []
         let questions = JSONParser.parseQuestionsJSON()!
         // Create dictioanry of question_id : questions
         var questionIDToQuestionModel: [Int: QuestionModel] = [:]
@@ -60,10 +61,19 @@ class QuestionManager {
                     sortedQuestions.append(questionModel)
                 }
             }
-            return sortedQuestions
+            sortedQuestionToReturn = sortedQuestions
         } else {
             // Assume all questions have score of 0 so just return the questions ordered
-            return questions
+            sortedQuestionToReturn = questions
+        }
+
+        // Filter out only the questions that are for above age 65
+        if showOnly65AboveQuestions {
+            return sortedQuestionToReturn.filter { questionModel in
+                questionModel.above_65_question
+            }
+        } else {
+            return sortedQuestionToReturn
         }
     }
 }

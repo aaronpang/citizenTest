@@ -42,7 +42,8 @@ struct RepresentativesResult: Decodable {
 struct MainMenuView: View {
     @State private var showFlashCards: Bool = false
     @State private var showInfo: Bool = false
-    
+    @State private var showOptions: Bool = false
+
     @State private var isLoading: Bool = false
     @State private var selectedState: AmericanState = .alabama
     @State private var isAbove65 = false
@@ -81,11 +82,12 @@ struct MainMenuView: View {
                 }
 
                 // If the user declines the location, then show a picker for them to pick the state
-                Toggle("Above the age of 65?", isOn: $isAbove65)
+                Toggle("Are you above the age of 65 and legal permanent resident for 20 or more years?", isOn: $isAbove65)
                     .toggleStyle(.switch)
                     .frame(alignment: .bottom).padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
                     .tint(Color(UIColor.systemBlue))
-                NavigationLink(destination: FlashcardView(answerModel: $answerModel)) {
+                    .padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
+                NavigationLink(destination: FlashcardView(isAbove65: $isAbove65, answerModel: $answerModel)) {
                     Button {
                         // Fetch the info on the state-specific questions
                         isLoading = true
@@ -115,14 +117,17 @@ struct MainMenuView: View {
             }
             .navigationBarTitle(Text("US Citizenship Prep"))
             .navigationDestination(isPresented: $showFlashCards) {
-                FlashcardView(answerModel: $answerModel)
+                FlashcardView(isAbove65: $isAbove65, answerModel: $answerModel)
             }
             .navigationDestination(isPresented: $showInfo) {
                 InfoView()
             }
+            .navigationDestination(isPresented: $showOptions) {
+                InfoView()
+            }
             .toolbar {
-                Button("Settings") {
-                    print("About tapped!")
+                Button("Options") {
+                    showOptions = true
                 }
                 Button("Info") {
                     showInfo = true
@@ -302,8 +307,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             guard let placemark = placemarks?.first else { return }
 
             // 3
-            guard let streetNumber = placemark.subThoroughfare else { return }
-            guard let streetName = placemark.thoroughfare else { return }
+            let streetNumber = placemark.subThoroughfare
+            let streetName = placemark.thoroughfare
             guard let city = placemark.locality else { return }
             guard let state = placemark.administrativeArea else { return }
             guard let zipCode = placemark.postalCode else { return }
@@ -311,7 +316,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             // 4
             self.state = state
             self.zipCode = zipCode
-            self.location = "\(streetNumber) \(streetName) \n \(city), \(state) \(zipCode)"
+            self.location = "\(streetNumber ?? "")\(streetName ?? "")\n\(city), \(state) \(zipCode)"
         }
     }
 

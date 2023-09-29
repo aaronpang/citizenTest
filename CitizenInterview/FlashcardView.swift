@@ -18,10 +18,12 @@ struct FlashcardView: View {
 
     @State private var questions: [QuestionModel] = []
     @Binding var answerModel: DynamicAnswerResultsModel?
+    @Binding var isAbove65: Bool
 
-    init(answerModel: Binding<DynamicAnswerResultsModel?>) {
+    init(isAbove65: Binding<Bool>, answerModel: Binding<DynamicAnswerResultsModel?>) {
         self._answerModel = answerModel
-        self._questions = State(initialValue: QuestionManager.getQuestionOrderedByScore())
+        self._isAbove65 = isAbove65
+        self._questions = State(initialValue: QuestionManager.getQuestionOrderedByScore(showOnly65AboveQuestions: false))
         let initialQuestion = questions[questionCounter]
         self._question = State(initialValue: initialQuestion.question)
         self._answer = State(initialValue: parseAnswersIntoString(answers: initialQuestion.answers))
@@ -91,7 +93,7 @@ struct FlashcardView: View {
                alignment: .topLeading)
         .navigationBarTitle(Text("Quiz Flashcards"))
         .onAppear {
-            questions = QuestionManager.getQuestionOrderedByScore()
+            questions = QuestionManager.getQuestionOrderedByScore(showOnly65AboveQuestions: true)
             questionCounter = 0
             updateQuestionAndAnswer()
         }
@@ -108,9 +110,6 @@ struct FlashcardView: View {
         }
         return answerString
     }
-
-//    let senators: [String]
-//    let representatives: [String]
 
     private func convertAnswerTokens(answer: String) -> String {
         guard let answerModel else { return answer }
@@ -153,7 +152,7 @@ struct FlashcardView: View {
         questionCounter += 1
         // If we go through all the questions, then get the new list of sorted questions and start again
         if questionCounter >= questions.count {
-            questions = QuestionManager.getQuestionOrderedByScore()
+            questions = QuestionManager.getQuestionOrderedByScore(showOnly65AboveQuestions: true)
             questionCounter = 0
         }
         updateQuestionAndAnswer()

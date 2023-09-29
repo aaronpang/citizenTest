@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct InfoView: View {
+struct OptionsView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
@@ -21,6 +21,6 @@ struct InfoView: View {
         .frame(maxWidth: .infinity, // Full Screen Width
                maxHeight: .infinity, // Full Screen Height
                alignment: .topLeading)
-        .navigationBarTitle(Text("Settings"))
+        .navigationBarTitle(Text("Options"))
     }
 }
