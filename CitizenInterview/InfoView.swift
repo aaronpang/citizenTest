@@ -11,16 +11,21 @@ struct InfoView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                Text("This is an unofficial app used to study for the U.S. Naturalization interview. It is completely free of charge to use and is opened sourced with no ads throughout the app.")
-                Text("The app is free because I (the creator) needed to study for the test myself and I wanted to build something that would help others study for free as well. The information is free, therefore the app should be free as well.")
-                Text("How the app works")
-                Text("We use google civics API information to fetch the latest info on your representatives, senators, and governments.")
-                Text("We use your location to help you easily identify your representatives, your senators, and the capital of your state to help you study for the test.")
+                Text("Why is this app free?").font(Font.system(size: 20)).bold()
+                Text("This is an unofficial app used to study for the U.S. Naturalization interview. It is completely free of charge to use and is open sourced with no ads throughout the app. It is free because I, (the developer) needed to study for the naturalization test myself and wanted to share it with others that needed to study as well.").padding()
+                Text("How does this app work?").font(Font.system(size: 20)).bold()
+                Text("Each time you start the quiz we take the questions you got wrong the most and display them first to help you study better. You can change this in 'Options'").padding()
+                Text("Why not use multiple choice?").font(Font.system(size: 20)).bold()
+                Text("The actual interview does not provide you with multiple choice so you must memorize the answers.").padding()
+                Text("Why do you need location data?").font(Font.system(size: 20)).bold()
+                Text("We use your location to help you easily identify your representatives, your senators, and the capital of your state to help you study for the test.").padding()
+                Text("Any other questions").font(Font.system(size: 20)).bold()
+                Text("This is an unofficial app. For all official inquiries please visit the [official USCIS.gov website](https://www.uscis.gov/citizenship/find-study-materials-and-resources/study-for-the-test)").padding()
             }.padding()
         }
         .frame(maxWidth: .infinity, // Full Screen Width
                maxHeight: .infinity, // Full Screen Height
                alignment: .topLeading)
-        .navigationBarTitle(Text("Settings"))
+        .navigationBarTitle(Text("Info"))
     }
 }

@@ -8,6 +8,8 @@
 import Foundation
 
 class QuestionManager {
+    static let questions: [QuestionModel]? = JSONParser.parseQuestionsJSON()
+
     class func updateQuestionScore(questionID: Int, scoreDifference: Int) {
         let userDefaults = UserDefaults.standard
         var questions: [Int: Int] = [:]
@@ -18,7 +20,7 @@ class QuestionManager {
             }
         } else {
             // If it was never initialized, initialize the array
-            if let questionModels = JSONParser.parseQuestionsJSON() {
+            if let questionModels = QuestionManager.questions {
                 var questionsToSave: [Int: Int] = [:]
                 for questionModel in questionModels {
                     questionsToSave[questionModel.question_id] = 0
@@ -36,10 +38,14 @@ class QuestionManager {
         userDefaults.set(storableQuestions, forKey: "questions")
     }
 
-    class func getQuestionOrderedByScore(showOnly65AboveQuestions: Bool) -> [QuestionModel] {
+    class func getQuestionOrderedByScore(showOnly65AboveQuestions: Bool, orderedQuestionsUnranked: Bool) -> [QuestionModel] {
+        guard let questions = QuestionManager.questions else { return [] }
+        // If we are going to show the questions ordered and unranked then don't even pull the question scores
+        if orderedQuestionsUnranked {
+            return questions
+        }
         // Parse the questions and get them ordered based on their score
         var sortedQuestionToReturn: [QuestionModel] = []
-        let questions = JSONParser.parseQuestionsJSON()!
         // Create dictioanry of question_id : questions
         var questionIDToQuestionModel: [Int: QuestionModel] = [:]
         for question in questions {

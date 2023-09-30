@@ -49,6 +49,9 @@ struct MainMenuView: View {
     @State private var isAbove65 = false
     @State private var locationEnabled = false
     @State private var answerModel: DynamicAnswerResultsModel?
+
+    @State private var orderedQuestionsUnranked: Bool = false
+
     @StateObject var locationManager = LocationManager()
 
     enum AmericanState: String, CaseIterable, Identifiable {
@@ -80,50 +83,48 @@ struct MainMenuView: View {
                     .onChange(of: selectedState) { _ in
                     }
                 }
-
                 // If the user declines the location, then show a picker for them to pick the state
                 Toggle("Are you above the age of 65 and legal permanent resident for 20 or more years?", isOn: $isAbove65)
                     .toggleStyle(.switch)
                     .frame(alignment: .bottom).padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
                     .tint(Color(UIColor.systemBlue))
                     .padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
-                NavigationLink(destination: FlashcardView(isAbove65: $isAbove65, answerModel: $answerModel)) {
-                    Button {
-                        // Fetch the info on the state-specific questions
-                        isLoading = true
-                        fetchData { dynamicAnswers, error in
-                            isLoading = false
-                            if let error = error {
-                                print(error)
-                            } else {
-                                answerModel = dynamicAnswers
-                                showFlashCards = true
-                            }
-                        }
-                    } label: {
-                        if isLoading {
-                            ProgressView().frame(maxWidth: .infinity, minHeight: 40)
-                                .tint(.white)
+                Spacer().frame(maxHeight: .infinity)
+                Button {
+                    // Fetch the info on the state-specific questions
+                    isLoading = true
+                    fetchData { dynamicAnswers, error in
+                        isLoading = false
+                        if let error = error {
+                            print(error)
                         } else {
-                            Text("Begin Quiz")
-                                .frame(maxWidth: .infinity, minHeight: 40)
+                            answerModel = dynamicAnswers
+                            showFlashCards = true
                         }
                     }
-                    .buttonStyle(.borderedProminent)
-                    .tint(Color(UIColor.systemBlue.withAlphaComponent(isLoading ? 0.8 : 1.0)))
-                    .frame(maxHeight: .infinity, alignment: .bottom)
-                    .padding()
+                } label: {
+                    if isLoading {
+                        ProgressView().frame(maxWidth: .infinity, minHeight: 40)
+                            .tint(.white)
+                    } else {
+                        Text("Begin Quiz")
+                            .frame(maxWidth: .infinity, minHeight: 40)
+                    }
                 }
+                .buttonStyle(.borderedProminent)
+                .tint(Color(UIColor.systemBlue.withAlphaComponent(isLoading ? 0.8 : 1.0)))
+                .frame(alignment: .bottom)
+                .padding()
             }
             .navigationBarTitle(Text("US Citizenship Prep"))
             .navigationDestination(isPresented: $showFlashCards) {
-                FlashcardView(isAbove65: $isAbove65, answerModel: $answerModel)
+                FlashcardView(isAbove65: $isAbove65, answerModel: $answerModel, orderedQuestionsUnranked: $orderedQuestionsUnranked)
             }
             .navigationDestination(isPresented: $showInfo) {
                 InfoView()
             }
             .navigationDestination(isPresented: $showOptions) {
-                InfoView()
+                OptionsView(orderedQuestionsUnranked: $orderedQuestionsUnranked)
             }
             .toolbar {
                 Button("Options") {

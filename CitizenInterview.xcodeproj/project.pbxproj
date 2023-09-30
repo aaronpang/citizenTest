@@ -20,7 +20,6 @@
 		E3698F912A985F8F0079B60E /* CitizenInterviewUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3698F902A985F8F0079B60E /* CitizenInterviewUITestsLaunchTests.swift */; };
 		E3698FA02A9DADC40079B60E /* Capitals.json in Resources */ = {isa = PBXBuildFile; fileRef = E3698F9E2A9C0B030079B60E /* Capitals.json */; };
 		E3698FA22A9DB0D20079B60E /* QuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3698FA12A9DB0D20079B60E /* QuestionModel.swift */; };
-		E395A3132ABE7C4F009E67C4 /* SomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E395A3122ABE7C4F009E67C4 /* SomeView.swift */; };
 		E395A3152ABE8D10009E67C4 /* Questions.json in Resources */ = {isa = PBXBuildFile; fileRef = E395A3142ABE8D10009E67C4 /* Questions.json */; };
 		E3DDE1C92AC686EC0071511B /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DDE1C82AC686EC0071511B /* OptionsView.swift */; };
 		E3E6F3302AB924FD00C4FD56 /* DynamicAnswerResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E6F32F2AB924FD00C4FD56 /* DynamicAnswerResultsModel.swift */; };
@@ -60,7 +59,6 @@
 		E3698F902A985F8F0079B60E /* CitizenInterviewUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizenInterviewUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		E3698F9E2A9C0B030079B60E /* Capitals.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Capitals.json; sourceTree = "<group>"; };
 		E3698FA12A9DB0D20079B60E /* QuestionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionModel.swift; sourceTree = "<group>"; };
-		E395A3122ABE7C4F009E67C4 /* SomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomeView.swift; sourceTree = "<group>"; };
 		E395A3142ABE8D10009E67C4 /* Questions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Questions.json; sourceTree = "<group>"; };
 		E3DDE1C82AC686EC0071511B /* OptionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
 		E3E6F32F2AB924FD00C4FD56 /* DynamicAnswerResultsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicAnswerResultsModel.swift; sourceTree = "<group>"; };
@@ -118,7 +116,6 @@
 				E3698F9E2A9C0B030079B60E /* Capitals.json */,
 				E3698F732A985F8E0079B60E /* CitizenInterviewApp.swift */,
 				E3698F752A985F8E0079B60E /* FlashcardView.swift */,
-				E395A3122ABE7C4F009E67C4 /* SomeView.swift */,
 				E35BE0D32AC1325500C6FA84 /* InfoView.swift */,
 				E3DDE1C82AC686EC0071511B /* OptionsView.swift */,
 				E3015DE42AB2B14800D574BD /* QuestionManager.swift */,
@@ -297,7 +294,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E395A3132ABE7C4F009E67C4 /* SomeView.swift in Sources */,
 				E3E6F3302AB924FD00C4FD56 /* DynamicAnswerResultsModel.swift in Sources */,
 				E3698FA22A9DB0D20079B60E /* QuestionModel.swift in Sources */,
 				E3015DE32AB0349E00D574BD /* JSONParser.swift in Sources */,

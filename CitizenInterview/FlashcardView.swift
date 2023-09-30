@@ -19,11 +19,13 @@ struct FlashcardView: View {
     @State private var questions: [QuestionModel] = []
     @Binding var answerModel: DynamicAnswerResultsModel?
     @Binding var isAbove65: Bool
+    @Binding var orderedQuestionsUnranked: Bool
 
-    init(isAbove65: Binding<Bool>, answerModel: Binding<DynamicAnswerResultsModel?>) {
+    init(isAbove65: Binding<Bool>, answerModel: Binding<DynamicAnswerResultsModel?>, orderedQuestionsUnranked: Binding<Bool>) {
         self._answerModel = answerModel
         self._isAbove65 = isAbove65
-        self._questions = State(initialValue: QuestionManager.getQuestionOrderedByScore(showOnly65AboveQuestions: false))
+        self._orderedQuestionsUnranked = orderedQuestionsUnranked
+        self._questions = State(initialValue: QuestionManager.getQuestionOrderedByScore(showOnly65AboveQuestions: isAbove65.wrappedValue, orderedQuestionsUnranked: orderedQuestionsUnranked.wrappedValue))
         let initialQuestion = questions[questionCounter]
         self._question = State(initialValue: initialQuestion.question)
         self._answer = State(initialValue: parseAnswersIntoString(answers: initialQuestion.answers))
@@ -36,7 +38,11 @@ struct FlashcardView: View {
                 Text(question).padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
                 if showAnswer {
                     Text(String("Answer")).fontWeight(.bold)
-                    Text(answer)
+                    ScrollView {
+                        VStack(alignment: .leading) {
+                            Text(answer)
+                        }.frame(maxWidth: .infinity, alignment: .leading)
+                    }
                 }
             }.frame(maxHeight: .infinity, alignment: .top)
             if !showAnswer {
@@ -93,7 +99,7 @@ struct FlashcardView: View {
                alignment: .topLeading)
         .navigationBarTitle(Text("Quiz Flashcards"))
         .onAppear {
-            questions = QuestionManager.getQuestionOrderedByScore(showOnly65AboveQuestions: true)
+            questions = QuestionManager.getQuestionOrderedByScore(showOnly65AboveQuestions: isAbove65, orderedQuestionsUnranked: orderedQuestionsUnranked)
             questionCounter = 0
             updateQuestionAndAnswer()
         }
@@ -152,7 +158,7 @@ struct FlashcardView: View {
         questionCounter += 1
         // If we go through all the questions, then get the new list of sorted questions and start again
         if questionCounter >= questions.count {
-            questions = QuestionManager.getQuestionOrderedByScore(showOnly65AboveQuestions: true)
+            questions = QuestionManager.getQuestionOrderedByScore(showOnly65AboveQuestions: isAbove65, orderedQuestionsUnranked: orderedQuestionsUnranked)
             questionCounter = 0
         }
         updateQuestionAndAnswer()
