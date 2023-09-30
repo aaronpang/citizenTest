@@ -84,11 +84,6 @@ struct MainMenuView: View {
                     }
                 }
                 // If the user declines the location, then show a picker for them to pick the state
-                Toggle("Are you above the age of 65 and legal permanent resident for 20 or more years?", isOn: $isAbove65)
-                    .toggleStyle(.switch)
-                    .frame(alignment: .bottom).padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
-                    .tint(Color(UIColor.systemBlue))
-                    .padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
                 Spacer().frame(maxHeight: .infinity)
                 Button {
                     // Fetch the info on the state-specific questions
@@ -124,7 +119,7 @@ struct MainMenuView: View {
                 InfoView()
             }
             .navigationDestination(isPresented: $showOptions) {
-                OptionsView(orderedQuestionsUnranked: $orderedQuestionsUnranked)
+                OptionsView(orderedQuestionsUnranked: $orderedQuestionsUnranked, isAbove65: $isAbove65)
             }
             .toolbar {
                 Button("Options") {

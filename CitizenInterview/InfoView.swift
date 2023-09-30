@@ -11,7 +11,7 @@ struct InfoView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                Text("Why is this app free?").font(Font.system(size: 20)).bold()
+                Text("What is this app for?").font(Font.system(size: 20)).bold()
                 Text("This is an unofficial app used to study for the U.S. Naturalization interview. It is completely free of charge to use and is open sourced with no ads throughout the app. It is free because I, (the developer) needed to study for the naturalization test myself and wanted to share it with others that needed to study as well.").padding()
                 Text("How does this app work?").font(Font.system(size: 20)).bold()
                 Text("Each time you start the quiz we take the questions you got wrong the most and display them first to help you study better. You can change this in 'Options'").padding()

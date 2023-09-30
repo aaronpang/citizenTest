@@ -9,20 +9,24 @@ import SwiftUI
 
 struct OptionsView: View {
     @Binding var orderedQuestionsUnranked: Bool
+    @Binding var isAbove65: Bool
 
-    init(orderedQuestionsUnranked: Binding<Bool>) {
+    init(orderedQuestionsUnranked: Binding<Bool>, isAbove65: Binding<Bool>) {
         self._orderedQuestionsUnranked = orderedQuestionsUnranked
+        self._isAbove65 = isAbove65
     }
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-//                HStack {
                 Toggle(isOn: $orderedQuestionsUnranked) {
-                    Text("Show Questions in Order regardless of Rank?")
-                    Text("Toggling this will show questions in the order in the USCIS booklet and not show the questions you normally get wrong first.")
-                }
-//                }
+                    Text("Show Questions in order regardless of rank?")
+                    Text("Toggling this will show questions in the order and not rank them by the ones you get wrong the most.")
+                }.tint(Color(UIColor.systemBlue))
+                Toggle(isOn: $isAbove65) {
+                    Text("Are you above the age of 65 and legal permanent resident for 20 or more years?")
+                    Text("Toggling this will reduce the number of question you have to study.")
+                }.tint(Color(UIColor.systemBlue))
             }.padding()
         }
         .frame(maxWidth: .infinity, // Full Screen Width

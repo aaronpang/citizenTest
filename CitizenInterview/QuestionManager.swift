@@ -40,10 +40,6 @@ class QuestionManager {
 
     class func getQuestionOrderedByScore(showOnly65AboveQuestions: Bool, orderedQuestionsUnranked: Bool) -> [QuestionModel] {
         guard let questions = QuestionManager.questions else { return [] }
-        // If we are going to show the questions ordered and unranked then don't even pull the question scores
-        if orderedQuestionsUnranked {
-            return questions
-        }
         // Parse the questions and get them ordered based on their score
         var sortedQuestionToReturn: [QuestionModel] = []
         // Create dictioanry of question_id : questions
@@ -52,7 +48,8 @@ class QuestionManager {
             questionIDToQuestionModel[question.question_id] = question
         }
         let userDefaults = UserDefaults.standard
-        if let questionScoreDict = userDefaults.object(forKey: "questions") as? [NSString: NSNumber] {
+        // If we are going to show the questions ordered and unranked then don't even pull the question scores
+        if !orderedQuestionsUnranked, let questionScoreDict = userDefaults.object(forKey: "questions") as? [NSString: NSNumber] {
             // Convert it to Int : Int
             var convertedQuestionScoreDict: [Int: Int] = [:]
             for questionScore in questionScoreDict {
