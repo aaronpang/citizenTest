@@ -7,7 +7,9 @@
 
 import Foundation
 
-struct QuestionModel: Decodable {
+struct QuestionModel: Decodable, Identifiable {
+    var id: Int { return question_id }
+    
     let question: String
     let answers: [String]
     let question_id: Int

@@ -28,7 +28,7 @@ struct FlashcardView: View {
         self._questions = State(initialValue: QuestionManager.getQuestionOrderedByScore(showOnly65AboveQuestions: isAbove65.wrappedValue, orderedQuestionsUnranked: orderedQuestionsUnranked.wrappedValue))
         let initialQuestion = questions[questionCounter]
         self._question = State(initialValue: initialQuestion.question)
-        self._answer = State(initialValue: parseAnswersIntoString(answers: initialQuestion.answers))
+        self._answer = State(initialValue: DynamicAnswerParser.parseAnswersIntoString(answers: initialQuestion.answers, answerModel: answerModel.wrappedValue))
     }
 
     var body: some View {
@@ -105,50 +105,9 @@ struct FlashcardView: View {
         }
     }
 
-    private func parseAnswersIntoString(answers: [String]) -> String {
-        var answerString = ""
-        let appendHyphen = answers.count > 1
-        answers.forEach { answer in
-            // Convert answer tokens from dynamic answer model
-            let convertedAnswer = convertAnswerTokens(answer: answer)
-            // If answer is a certain key then pull the dynamic data that way
-            answerString.append((appendHyphen ? " - " : "") + convertedAnswer.localizedCapitalized + "\n")
-        }
-        return answerString
-    }
-
-    private func convertAnswerTokens(answer: String) -> String {
-        guard let answerModel else { return answer }
-        var newAnswer = answer
-            .replacingOccurrences(of: "$president", with: answerModel.president)
-            .replacingOccurrences(of: "$vice_president", with: answerModel.vicePresident)
-            .replacingOccurrences(of: "$party_of_president", with: answerModel.presidentPoliticalParty)
-            .replacingOccurrences(of: "$governor", with: answerModel.governor)
-            .replacingOccurrences(of: "$capital", with: answerModel.capital)
-            .replacingOccurrences(of: "$speaker_of_house", with: answerModel.speakerOfHouse)
-            .replacingOccurrences(of: "$number_supreme_court_justices", with: String(answerModel.numberOfSupremeCourtJustices))
-            .replacingOccurrences(of: "$chief_justice", with: String(answerModel.chiefJustice))
-        if newAnswer == "$senators" {
-            var senatorString = ""
-            let appendHyphen = answerModel.senators.count > 1
-            answerModel.senators.forEach { senator in
-                senatorString.append((appendHyphen ? " - " : "") + senator.localizedCapitalized + "\n")
-            }
-            newAnswer = senatorString
-        } else if newAnswer == "$representatives" {
-            var representativeString = ""
-            let appendHyphen = answerModel.senators.count > 1
-            answerModel.representatives.forEach { representative in
-                representativeString.append((appendHyphen ? " - " : "") + representative.localizedCapitalized + "\n")
-            }
-            newAnswer = representativeString
-        }
-        return newAnswer
-    }
-
     func updateQuestionAndAnswer() {
         question = questions[questionCounter].question
-        answer = parseAnswersIntoString(answers: questions[questionCounter].answers)
+        answer = DynamicAnswerParser.parseAnswersIntoString(answers: questions[questionCounter].answers, answerModel: answerModel)
     }
 
     func showNextQuestion() {
