@@ -116,20 +116,13 @@
 		E3698F722A985F8E0079B60E /* CitizenInterview */ = {
 			isa = PBXGroup;
 			children = (
-				E395A3142ABE8D10009E67C4 /* Questions.json */,
-				E3698F9E2A9C0B030079B60E /* Capitals.json */,
 				E3698F732A985F8E0079B60E /* CitizenInterviewApp.swift */,
-				E3698F752A985F8E0079B60E /* FlashcardView.swift */,
-				E35BE0D32AC1325500C6FA84 /* InfoView.swift */,
-				E3DDE1C82AC686EC0071511B /* OptionsView.swift */,
-				E3015DE42AB2B14800D574BD /* QuestionManager.swift */,
-				E3DDE1CA2AC907B00071511B /* AllQuestionsView.swift */,
-				E3015DE02AACF26600D574BD /* MainMenuView.swift */,
-				E38047B32ACE76B200A88FE2 /* DynamicAnswerParser.swift */,
-				E3015DE22AB0349E00D574BD /* JSONParser.swift */,
+				E38047B62ACE7B9200A88FE2 /* Data */,
+				E38047B72ACE7BA600A88FE2 /* Parsers */,
+				E38047B52ACE7B7A00A88FE2 /* Views */,
+				E3E6F3312AB9250800C4FD56 /* Models */,
 				E3698F772A985F8E0079B60E /* Assets.xcassets */,
 				E3698F792A985F8E0079B60E /* Preview Content */,
-				E3E6F3312AB9250800C4FD56 /* Model */,
 			);
 			path = CitizenInterview;
 			sourceTree = "<group>";
@@ -159,13 +152,44 @@
 			path = CitizenInterviewUITests;
 			sourceTree = "<group>";
 		};
-		E3E6F3312AB9250800C4FD56 /* Model */ = {
+		E38047B52ACE7B7A00A88FE2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E3698F752A985F8E0079B60E /* FlashcardView.swift */,
+				E35BE0D32AC1325500C6FA84 /* InfoView.swift */,
+				E3DDE1C82AC686EC0071511B /* OptionsView.swift */,
+				E3DDE1CA2AC907B00071511B /* AllQuestionsView.swift */,
+				E3015DE02AACF26600D574BD /* MainMenuView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E38047B62ACE7B9200A88FE2 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				E395A3142ABE8D10009E67C4 /* Questions.json */,
+				E3698F9E2A9C0B030079B60E /* Capitals.json */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		E38047B72ACE7BA600A88FE2 /* Parsers */ = {
+			isa = PBXGroup;
+			children = (
+				E3015DE42AB2B14800D574BD /* QuestionManager.swift */,
+				E38047B32ACE76B200A88FE2 /* DynamicAnswerParser.swift */,
+				E3015DE22AB0349E00D574BD /* JSONParser.swift */,
+			);
+			path = Parsers;
+			sourceTree = "<group>";
+		};
+		E3E6F3312AB9250800C4FD56 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				E3E6F32F2AB924FD00C4FD56 /* DynamicAnswerResultsModel.swift */,
 				E3698FA12A9DB0D20079B60E /* QuestionModel.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
