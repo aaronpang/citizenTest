@@ -7,6 +7,37 @@
 
 import Foundation
 
+enum OfficialRole: String, Codable {
+    case none
+    case president
+    case vicePresident
+    case senator
+    case representative
+    case governor
+}
+
+struct Official: Codable {
+    let name: String
+    let party: String
+    let role: OfficialRole
+}
+
+struct OfficeResult: Decodable {
+    let levels: [String]
+    let roles: [String]
+    let officialIndices: [Int]
+}
+
+struct OfficialResult: Decodable {
+    let name: String
+    let party: String
+}
+
+struct RepresentativesResult: Decodable {
+    let offices: [OfficeResult]
+    let officials: [OfficialResult]
+}
+
 class QuestionManager {
     static let questions: [QuestionModel]? = JSONParser.parseQuestionsJSON()
 

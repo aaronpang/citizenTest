@@ -8,41 +8,11 @@
 import CoreLocation
 import SwiftUI
 
-enum OfficialRole: String, Codable {
-    case none
-    case president
-    case vicePresident
-    case senator
-    case representative
-    case governor
-}
-
-struct Official: Codable {
-    let name: String
-    let party: String
-    let role: OfficialRole
-}
-
-struct OfficeResult: Decodable {
-    let levels: [String]
-    let roles: [String]
-    let officialIndices: [Int]
-}
-
-struct OfficialResult: Decodable {
-    let name: String
-    let party: String
-}
-
-struct RepresentativesResult: Decodable {
-    let offices: [OfficeResult]
-    let officials: [OfficialResult]
-}
-
 struct MainMenuView: View {
     @State private var showFlashCards: Bool = false
     @State private var showInfo: Bool = false
     @State private var showOptions: Bool = false
+    @State private var showChecklist: Bool = false
 
     @State private var isLoading: Bool = false
     @State private var selectedState: AmericanState = .alabama
@@ -83,6 +53,16 @@ struct MainMenuView: View {
                     .onChange(of: selectedState) { _ in
                     }
                 }
+                    Button {
+                        showChecklist.toggle()
+                    } label: {
+                        if isLoading {
+                            ProgressView().frame(minWidth: 100, minHeight: 40)
+                        } else {
+                            Text("Show checklist items for day of interview")
+                        }
+                    }
+                    .buttonStyle(.bordered)
                 // If the user declines the location, then show a picker for them to pick the state
                 Spacer().frame(maxHeight: .infinity)
                 Button {
@@ -121,6 +101,9 @@ struct MainMenuView: View {
             }
             .navigationDestination(isPresented: $showOptions) {
                 OptionsView(orderedQuestionsUnranked: $orderedQuestionsUnranked, isAbove65: $isAbove65, locationManager: locationManager)
+            }
+            .navigationDestination(isPresented: $showChecklist) {
+                ChecklistView()
             }
             .toolbar {
                 Button("Options") {
