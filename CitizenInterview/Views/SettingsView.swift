@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OptionsView: View {
+struct SettingsView: View {
     @Binding var orderedQuestionsUnranked: Bool
     @Binding var isAbove65: Bool
 
@@ -69,7 +69,7 @@ struct OptionsView: View {
         .frame(maxWidth: .infinity, // Full Screen Width
                maxHeight: .infinity, // Full Screen Height
                alignment: .topLeading)
-        .navigationBarTitle(Text("Options"))
+        .navigationBarTitle(Text("Settings"))
         .navigationDestination(isPresented: $showAllQuestionsList) {
             AllQuestionsView(answerModel: answerModel)
         }

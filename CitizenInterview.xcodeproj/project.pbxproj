@@ -10,7 +10,7 @@
 		E3015DE12AACF26600D574BD /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3015DE02AACF26600D574BD /* MainMenuView.swift */; };
 		E3015DE32AB0349E00D574BD /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3015DE22AB0349E00D574BD /* JSONParser.swift */; };
 		E3015DE52AB2B14800D574BD /* QuestionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3015DE42AB2B14800D574BD /* QuestionManager.swift */; };
-		E35BE0D42AC1325500C6FA84 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35BE0D32AC1325500C6FA84 /* InfoView.swift */; };
+		E35BE0D42AC1325500C6FA84 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35BE0D32AC1325500C6FA84 /* AboutView.swift */; };
 		E3698F742A985F8E0079B60E /* CitizenInterviewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3698F732A985F8E0079B60E /* CitizenInterviewApp.swift */; };
 		E3698F762A985F8E0079B60E /* FlashcardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3698F752A985F8E0079B60E /* FlashcardView.swift */; };
 		E3698F782A985F8E0079B60E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3698F772A985F8E0079B60E /* Assets.xcassets */; };
@@ -23,7 +23,7 @@
 		E38047B42ACE76B200A88FE2 /* DynamicAnswerParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38047B32ACE76B200A88FE2 /* DynamicAnswerParser.swift */; };
 		E38047B92ACFC2AC00A88FE2 /* ChecklistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38047B82ACFC2AC00A88FE2 /* ChecklistView.swift */; };
 		E395A3152ABE8D10009E67C4 /* Questions.json in Resources */ = {isa = PBXBuildFile; fileRef = E395A3142ABE8D10009E67C4 /* Questions.json */; };
-		E3DDE1C92AC686EC0071511B /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DDE1C82AC686EC0071511B /* OptionsView.swift */; };
+		E3DDE1C92AC686EC0071511B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DDE1C82AC686EC0071511B /* SettingsView.swift */; };
 		E3DDE1CB2AC907B00071511B /* AllQuestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DDE1CA2AC907B00071511B /* AllQuestionsView.swift */; };
 		E3E6F3302AB924FD00C4FD56 /* DynamicAnswerResultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E6F32F2AB924FD00C4FD56 /* DynamicAnswerResultsModel.swift */; };
 /* End PBXBuildFile section */
@@ -49,7 +49,7 @@
 		E3015DE02AACF26600D574BD /* MainMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		E3015DE22AB0349E00D574BD /* JSONParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
 		E3015DE42AB2B14800D574BD /* QuestionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionManager.swift; sourceTree = "<group>"; };
-		E35BE0D32AC1325500C6FA84 /* InfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		E35BE0D32AC1325500C6FA84 /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		E3698F702A985F8E0079B60E /* CitizenInterview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CitizenInterview.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3698F732A985F8E0079B60E /* CitizenInterviewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizenInterviewApp.swift; sourceTree = "<group>"; };
 		E3698F752A985F8E0079B60E /* FlashcardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashcardView.swift; sourceTree = "<group>"; };
@@ -65,7 +65,7 @@
 		E38047B32ACE76B200A88FE2 /* DynamicAnswerParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicAnswerParser.swift; sourceTree = "<group>"; };
 		E38047B82ACFC2AC00A88FE2 /* ChecklistView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChecklistView.swift; sourceTree = "<group>"; };
 		E395A3142ABE8D10009E67C4 /* Questions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Questions.json; sourceTree = "<group>"; };
-		E3DDE1C82AC686EC0071511B /* OptionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
+		E3DDE1C82AC686EC0071511B /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		E3DDE1CA2AC907B00071511B /* AllQuestionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllQuestionsView.swift; sourceTree = "<group>"; };
 		E3E6F32F2AB924FD00C4FD56 /* DynamicAnswerResultsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicAnswerResultsModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -158,8 +158,8 @@
 			isa = PBXGroup;
 			children = (
 				E3698F752A985F8E0079B60E /* FlashcardView.swift */,
-				E35BE0D32AC1325500C6FA84 /* InfoView.swift */,
-				E3DDE1C82AC686EC0071511B /* OptionsView.swift */,
+				E35BE0D32AC1325500C6FA84 /* AboutView.swift */,
+				E3DDE1C82AC686EC0071511B /* SettingsView.swift */,
 				E3DDE1CA2AC907B00071511B /* AllQuestionsView.swift */,
 				E3015DE02AACF26600D574BD /* MainMenuView.swift */,
 				E38047B82ACFC2AC00A88FE2 /* ChecklistView.swift */,
@@ -332,10 +332,10 @@
 				E3015DE32AB0349E00D574BD /* JSONParser.swift in Sources */,
 				E38047B92ACFC2AC00A88FE2 /* ChecklistView.swift in Sources */,
 				E3015DE12AACF26600D574BD /* MainMenuView.swift in Sources */,
-				E3DDE1C92AC686EC0071511B /* OptionsView.swift in Sources */,
+				E3DDE1C92AC686EC0071511B /* SettingsView.swift in Sources */,
 				E3698F762A985F8E0079B60E /* FlashcardView.swift in Sources */,
 				E3698F742A985F8E0079B60E /* CitizenInterviewApp.swift in Sources */,
-				E35BE0D42AC1325500C6FA84 /* InfoView.swift in Sources */,
+				E35BE0D42AC1325500C6FA84 /* AboutView.swift in Sources */,
 				E3DDE1CB2AC907B00071511B /* AllQuestionsView.swift in Sources */,
 				E38047B42ACE76B200A88FE2 /* DynamicAnswerParser.swift in Sources */,
 				E3015DE52AB2B14800D574BD /* QuestionManager.swift in Sources */,

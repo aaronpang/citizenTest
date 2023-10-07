@@ -10,8 +10,8 @@ import SwiftUI
 
 struct MainMenuView: View {
     @State private var showFlashCards: Bool = false
-    @State private var showInfo: Bool = false
-    @State private var showOptions: Bool = false
+    @State private var showAbout: Bool = false
+    @State private var showSettings: Bool = false
     @State private var showChecklist: Bool = false
 
     @State private var isLoading: Bool = false
@@ -30,10 +30,22 @@ struct MainMenuView: View {
     }
 
     var body: some View {
+        let imageSize = UIScreen.main.bounds.size.width / 2
         NavigationStack {
             VStack(alignment: .leading) {
+                VStack(alignment: .center) {
+                    Image("main_menu_image", label: Text("hello!"))
+                        .resizable()
+                        .frame(width: imageSize, height: imageSize, alignment: .center)
+                        .clipShape(.circle)
+                    Text("This is an unofficial app that can help you prepare for the USCIS naturalization interview.\n\nIt is absolutely free of charge and built with love and care ❤️.")
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding()
+                }
+                .frame(maxWidth: .infinity)
+                Spacer().frame(maxHeight: .infinity)
                 if locationManager.authorization == .authorizedAlways || locationManager.authorization == .authorizedWhenInUse {
-                    Text(String(format: "The address we are using is:\n%@", locationManager.location))
+                    Text(String(format: "Current location: %@", locationManager.shortenedLocation)).frame(maxWidth:.infinity, alignment: .center)
                 } else if locationManager.authorization == .notDetermined {
                     Text("Please accept the location access so we can provide to you the most accurate information for your studies")
                     Toggle("Location Enabled", isOn: $locationEnabled)
@@ -53,18 +65,7 @@ struct MainMenuView: View {
                     .onChange(of: selectedState) { _ in
                     }
                 }
-                    Button {
-                        showChecklist.toggle()
-                    } label: {
-                        if isLoading {
-                            ProgressView().frame(minWidth: 100, minHeight: 40)
-                        } else {
-                            Text("Show checklist items for day of interview")
-                        }
-                    }
-                    .buttonStyle(.bordered)
                 // If the user declines the location, then show a picker for them to pick the state
-                Spacer().frame(maxHeight: .infinity)
                 Button {
                     // Fetch the info on the state-specific questions
                     isLoading = true
@@ -91,26 +92,32 @@ struct MainMenuView: View {
                 .tint(Color(UIColor.systemBlue.withAlphaComponent(isLoading ? 0.8 : 1.0)))
                 .frame(alignment: .bottom)
                 .padding()
+                Button {
+                    showChecklist.toggle()
+                } label: {
+                    Text("Checklist on Day of Interview")
+                        .frame(maxWidth: .infinity, minHeight: 20)
+                }
             }
             .navigationBarTitle(Text("US Citizenship Prep"))
             .navigationDestination(isPresented: $showFlashCards) {
                 FlashcardView(isAbove65: $isAbove65, answerModel: $answerModel, orderedQuestionsUnranked: $orderedQuestionsUnranked)
             }
-            .navigationDestination(isPresented: $showInfo) {
-                InfoView()
+            .navigationDestination(isPresented: $showAbout) {
+                AboutView()
             }
-            .navigationDestination(isPresented: $showOptions) {
-                OptionsView(orderedQuestionsUnranked: $orderedQuestionsUnranked, isAbove65: $isAbove65, locationManager: locationManager)
+            .navigationDestination(isPresented: $showSettings) {
+                SettingsView(orderedQuestionsUnranked: $orderedQuestionsUnranked, isAbove65: $isAbove65, locationManager: locationManager)
             }
             .navigationDestination(isPresented: $showChecklist) {
                 ChecklistView()
             }
             .toolbar {
-                Button("Options") {
-                    showOptions = true
+                Button("Settings") {
+                    showSettings = true
                 }
-                Button("Info") {
-                    showInfo = true
+                Button("About") {
+                    showAbout = true
                 }
             }
             .padding()
@@ -141,6 +148,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var state: String = ""
     @Published var zipCode: String = ""
     @Published var authorization: CLAuthorizationStatus = .notDetermined
+    @Published var shortenedLocation: String = ""
 
     var manager = {
         let manager = CLLocationManager()
@@ -180,6 +188,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             self.state = state
             self.zipCode = zipCode
             self.location = "\(streetNumber ?? "")\(streetName ?? "")\n\(city), \(state) \(zipCode)"
+            self.shortenedLocation = "\(city), \(state)"
         }
     }
 
