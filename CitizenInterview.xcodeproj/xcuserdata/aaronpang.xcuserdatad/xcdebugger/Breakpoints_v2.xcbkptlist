@@ -7,70 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "8CC4D383-8DD2-4408-9DA6-7DCC401C04B8"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CitizenInterview/Views/MainMenuView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F3239E3F-8D14-48A8-B2FC-9544337F6739"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CitizenInterview/Views/MainMenuView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
-            landmarkName = "locationManager(_:didUpdateLocations:)"
-            landmarkType = "9">
-            <Locations>
-               <Location
-                  uuid = "F3239E3F-8D14-48A8-B2FC-9544337F6739 - 719fcd18f1b4279b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Array&lt;__C.CLPlacemark&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in CitizenInterview.LocationManager.locationManager(_: __C.CLLocationManager, didUpdateLocations: Swift.Array&lt;__C.CLLocation&gt;) -&gt; ()"
-                  moduleName = "CitizenInterview"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/aaronpang/Desktop/CitizenInterview/CitizenInterview/Views/MainMenuView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "195"
-                  endingLineNumber = "195"
-                  offsetFromSymbolStart = "584">
-               </Location>
-               <Location
-                  uuid = "F3239E3F-8D14-48A8-B2FC-9544337F6739 - 719fcd18f1b427ba"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Array&lt;__C.CLPlacemark&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in CitizenInterview.LocationManager.locationManager(_: __C.CLLocationManager, didUpdateLocations: Swift.Array&lt;__C.CLLocation&gt;) -&gt; ()"
-                  moduleName = "CitizenInterview"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/aaronpang/Desktop/CitizenInterview/CitizenInterview/Views/MainMenuView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "194"
-                  endingLineNumber = "194"
-                  offsetFromSymbolStart = "540">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "B8F1E4E7-85C9-426D-8991-48F243C80D69"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -110,56 +46,55 @@
             filePath = "CitizenInterview/Parsers/QuestionManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
             landmarkName = "fetchData(locationManager:completion:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0FC2EB8D-51C0-494D-8A1D-9FC17192C67F"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CitizenInterview/Views/MainMenuView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "211"
-            endingLineNumber = "211"
-            landmarkName = "locationManager(_:didUpdateLocations:)"
-            landmarkType = "9">
             <Locations>
                <Location
-                  uuid = "0FC2EB8D-51C0-494D-8A1D-9FC17192C67F - f53b4fa4f7fa8e4"
+                  uuid = "EDD1115F-86CA-4B61-B143-F5982211F12E - ce49f80b7c5664bd"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "CitizenInterview.LocationManager.replaceLocationWithBackupState(backupState: CitizenInterview.AmericanState) -&gt; ()"
+                  symbolName = "static CitizenInterview.QuestionManager.officalNames(officials: Swift.Array&lt;CitizenInterview.Official&gt;, role: CitizenInterview.OfficialRole, location: Swift.String) -&gt; Swift.Array&lt;Swift.String&gt;"
                   moduleName = "CitizenInterview"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/aaronpang/Desktop/CitizenInterview/CitizenInterview/Views/MainMenuView.swift"
+                  urlString = "file:///Users/aaronpang/Desktop/CitizenInterview/CitizenInterview/Parsers/QuestionManager.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "212"
-                  endingLineNumber = "212"
-                  offsetFromSymbolStart = "104">
+                  startingLineNumber = "207"
+                  endingLineNumber = "207"
+                  offsetFromSymbolStart = "472">
                </Location>
                <Location
-                  uuid = "0FC2EB8D-51C0-494D-8A1D-9FC17192C67F - 719fcd18f1b4218b"
+                  uuid = "EDD1115F-86CA-4B61-B143-F5982211F12E - 1f77ff7adc5ba40f"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Array&lt;__C.CLPlacemark&gt;&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in CitizenInterview.LocationManager.locationManager(_: __C.CLLocationManager, didUpdateLocations: Swift.Array&lt;__C.CLLocation&gt;) -&gt; ()"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in static CitizenInterview.QuestionManager.fetchData(locationManager: CitizenInterview.LocationManager, completion: (Swift.Optional&lt;CitizenInterview.DynamicAnswerResultsModel&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
                   moduleName = "CitizenInterview"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/aaronpang/Desktop/CitizenInterview/CitizenInterview/Views/MainMenuView.swift"
+                  urlString = "file:///Users/aaronpang/Desktop/CitizenInterview/CitizenInterview/Parsers/QuestionManager.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "211"
-                  endingLineNumber = "211"
-                  offsetFromSymbolStart = "2868">
+                  startingLineNumber = "206"
+                  endingLineNumber = "206"
+                  offsetFromSymbolStart = "6108">
+               </Location>
+               <Location
+                  uuid = "EDD1115F-86CA-4B61-B143-F5982211F12E - 1f77ff7adc5ba40f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in static CitizenInterview.QuestionManager.fetchData(locationManager: CitizenInterview.LocationManager, completion: (Swift.Optional&lt;CitizenInterview.DynamicAnswerResultsModel&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "CitizenInterview"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aaronpang/Desktop/CitizenInterview/CitizenInterview/Parsers/QuestionManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "206"
+                  endingLineNumber = "206"
+                  offsetFromSymbolStart = "5928">
                </Location>
             </Locations>
          </BreakpointContent>

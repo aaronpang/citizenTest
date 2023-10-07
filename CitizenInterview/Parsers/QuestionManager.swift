@@ -40,6 +40,7 @@ struct RepresentativesResult: Decodable {
 
 class QuestionManager {
     static let questions: [QuestionModel]? = JSONParser.parseQuestionsJSON()
+    static let defaultErrorString = "Unable to retrieve information. Please search this online"
 
     class func updateQuestionScore(questionID: Int, scoreDifference: Int) {
         let userDefaults = UserDefaults.standard
@@ -167,7 +168,7 @@ class QuestionManager {
                     }[0]
                 let stateCapitals = JSONParser.parseStateCapitals() ?? [:]
                 let state = locationManager.state
-                let capital = stateCapitals[state] ?? String(format: "Couldn't find capital for state %@. Please search this up online.", state)
+                let capital = stateCapitals[state] ?? QuestionManager.defaultErrorString
                 let answers = DynamicAnswerResultsModel(senators: senators,
                                                         representatives: representatives,
                                                         president: president,
@@ -188,8 +189,21 @@ class QuestionManager {
 
                 completion(answers, nil)
             } catch {
-                print(error)
-                completion(nil, error)
+                let stateCapitals = JSONParser.parseStateCapitals() ?? [:]
+                let state = locationManager.state
+                let capital = stateCapitals[state] ?? String(format: "Couldn't find capital for state %@. Please search this up online.", state)
+                let answers = DynamicAnswerResultsModel(senators: [QuestionManager.defaultErrorString],
+                                                        representatives: [QuestionManager.defaultErrorString],
+                                                        president: QuestionManager.defaultErrorString,
+                                                        presidentPoliticalParty: QuestionManager.defaultErrorString,
+                                                        vicePresident: QuestionManager.defaultErrorString,
+                                                        governor: QuestionManager.defaultErrorString,
+                                                        capital: capital,
+                                                        speakerOfHouse: "Patrick McHenry",
+                                                        numberOfSupremeCourtJustices: 9,
+                                                        chiefJustice: "John Roberts") // Don't hard code these
+
+                completion(answers, error)
             }
         }
         task.resume()
@@ -202,7 +216,7 @@ class QuestionManager {
             official.name
         }
         if names.count <= 0 {
-            return ["Unable to retrieve information. Please visit the (USCIS government website)[uscis.gov/citizenship/testupdates] for updates."]
+            return [QuestionManager.defaultErrorString]
         }
         return names
     }

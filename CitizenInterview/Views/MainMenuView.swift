@@ -9,18 +9,22 @@ import CoreLocation
 import SwiftUI
 
 struct MainMenuView: View {
+    // Navigation
     @State private var showFlashCards: Bool = false
     @State private var showAbout: Bool = false
     @State private var showSettings: Bool = false
     @State private var showChecklist: Bool = false
 
+    // UI
     @State private var isLoading: Bool = false
-    @State private var selectedState: AmericanState = .alabama
-    @State private var isAbove65 = false
     @State private var locationEnabled = false
     @State private var answerModel: DynamicAnswerResultsModel?
 
+    // Settings
+    @State private var isAbove65 = false
+    @State private var overrideWithProvidedState: Bool = false
     @State private var orderedQuestionsUnranked: Bool = false
+    @State private var selectedState: AmericanState = .alabama
 
     @StateObject var locationManager = LocationManager()
 
@@ -50,7 +54,7 @@ struct MainMenuView: View {
                         .padding()
                 } else if locationManager.authorization == .notDetermined {
                     VStack(alignment: .leading) {
-                        Text(String(format:"Please accept location access so we can provide to you the most accurate information for your studies. If none provided, we default to '%@'", selectedState.rawValue.capitalized) )
+                        Text(String(format: "Please accept location access so we can provide to you the most accurate information for your studies. If none provided, we default to '%@'", selectedState.rawValue.capitalized))
                             .fixedSize(horizontal: false, vertical: true)
 
                         Button {
@@ -79,7 +83,7 @@ struct MainMenuView: View {
                 Button {
                     // Fetch the info on the state-specific questions
                     isLoading = true
-                    if locationManager.location.isEmpty {
+                    if locationManager.location.isEmpty || overrideWithProvidedState {
                         locationManager.replaceLocationWithBackupState(backupState: selectedState)
                     }
                     QuestionManager.fetchData(locationManager: locationManager,
@@ -87,10 +91,10 @@ struct MainMenuView: View {
                                                   isLoading = false
                                                   if let error = error {
                                                       print(error)
-                                                  } else {
-                                                      answerModel = dynamicAnswers
-                                                      showFlashCards = true
+                                                      // TODO: Error Fetching
                                                   }
+                                                  answerModel = dynamicAnswers
+                                                  showFlashCards = true
                                               })
                 } label: {
                     if isLoading {
@@ -109,11 +113,11 @@ struct MainMenuView: View {
                 Button {
                     showChecklist.toggle()
                 } label: {
-                    Text("Checklist for Day of Interview")
-                        .frame(maxWidth: .infinity, minHeight: 20)
+                    Text("Interview Day Checklist")
+                        .frame(maxWidth: .infinity)
                 }
             }
-            .navigationBarTitle(Text("US Citizenship Prep"))
+            .navigationBarTitle(Text("US Citizen Interview"))
             .navigationDestination(isPresented: $showFlashCards) {
                 FlashcardView(isAbove65: $isAbove65, answerModel: $answerModel, orderedQuestionsUnranked: $orderedQuestionsUnranked)
             }
@@ -124,7 +128,8 @@ struct MainMenuView: View {
                 SettingsView(orderedQuestionsUnranked: $orderedQuestionsUnranked,
                              isAbove65: $isAbove65,
                              locationManager: locationManager,
-                             selectedState: $selectedState)
+                             selectedState: $selectedState,
+                             overrideWithProvidedState: $overrideWithProvidedState)
             }
             .navigationDestination(isPresented: $showChecklist) {
                 ChecklistView()
@@ -139,6 +144,16 @@ struct MainMenuView: View {
             }
             .padding()
             .onAppear {
+                // Fetch latest settings
+                isAbove65 = UserDefaults.standard.bool(forKey: "settings_is_above_65")
+                overrideWithProvidedState = UserDefaults.standard.bool(forKey: "settings_override_with_provided_state")
+                orderedQuestionsUnranked = UserDefaults.standard.bool(forKey: "settings_order_question_unranked")
+                if let storedAmericanStateString = UserDefaults.standard.string(forKey: "settings_american_state"),
+                   let americanState = AmericanState(rawValue: storedAmericanStateString)
+                {
+                    selectedState = americanState
+                }
+
                 // Check if location is enabled on appear
                 // Depending on permissions, show different UIs (request button, address, or state picker)
                 switch locationManager.manager.authorizationStatus {
@@ -146,12 +161,19 @@ struct MainMenuView: View {
                 // Show authorization button
                 case .denied: break
                 case .restricted: break
-                // Show picker and button to screen to allow authorization
                 case .authorizedAlways:
-                    locationManager.manager.requestLocation()
+                    // Ignore any location updates if we have an overriden location
+                    if overrideWithProvidedState {
+                        locationManager.replaceLocationWithBackupState(backupState: selectedState)
+                    } else {
+                        locationManager.manager.requestLocation()
+                    }
                 case .authorizedWhenInUse:
-                    // Sweet get the user location and see if it needs to be stored
-                    locationManager.manager.requestLocation()
+                    if overrideWithProvidedState {
+                        locationManager.replaceLocationWithBackupState(backupState: selectedState)
+                    } else {
+                        locationManager.manager.requestLocation()
+                    }
                 @unknown default:
                     break
                 }
@@ -166,6 +188,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var zipCode: String = ""
     @Published var authorization: CLAuthorizationStatus = .notDetermined
     @Published var shortenedLocation: String = ""
+    private var overridenStateObject: StateModel?
 
     var manager = {
         let manager = CLLocationManager()
@@ -179,7 +202,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         authorization = manager.authorizationStatus
-        if authorization == .authorizedWhenInUse || authorization == .authorizedAlways {
+        // Don't request location if we're overriding the state
+        if overridenStateObject == nil && (authorization == .authorizedWhenInUse || authorization == .authorizedAlways) {
             manager.requestLocation()
         }
     }
@@ -221,6 +245,13 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         location = stateObject.capital
         zipCode = stateObject.zip
         state = stateObject.abbreviation
+        let city = stateObject.capital
+        shortenedLocation = "\(city), \(state)"
+        overridenStateObject = stateObject
+    }
+
+    func removeOverridenStateObject() {
+        overridenStateObject = nil
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {}

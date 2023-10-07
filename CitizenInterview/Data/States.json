@@ -92,7 +92,7 @@
   {
     "state_name": "iowa",
     "abbreviation": "IA",
-    "capital": "Des_Moines",
+    "capital": "Des Moines",
     "zip": "50301"
   },
   {
@@ -110,7 +110,7 @@
   {
     "state_name": "louisiana",
     "abbreviation": "LA",
-    "capital": "Baton_Rouge",
+    "capital": "Baton Rouge",
     "zip": "70801"
   },
   {
@@ -140,7 +140,7 @@
   {
     "state_name": "minnesota",
     "abbreviation": "MN",
-    "capital": "St._Paul",
+    "capital": "St. Paul",
     "zip": "55101"
   },
   {
@@ -152,7 +152,7 @@
   {
     "state_name": "missouri",
     "abbreviation": "MO",
-    "capital": "Jefferson_City",
+    "capital": "Jefferson City",
     "zip": "65101"
   },
   {
@@ -170,7 +170,7 @@
   {
     "state_name": "nevada",
     "abbreviation": "NV",
-    "capital": "Carson_City",
+    "capital": "Carson City",
     "zip": "89701"
   },
   {
@@ -188,7 +188,7 @@
   {
     "state_name": "new_mexico",
     "abbreviation": "NM",
-    "capital": "Santa_Fe",
+    "capital": "Santa Fe",
     "zip": "87501"
   },
   {
@@ -218,7 +218,7 @@
   {
     "state_name": "oklahoma",
     "abbreviation": "OK",
-    "capital": "Oklahoma_City",
+    "capital": "Oklahoma City",
     "zip": "73101"
   },
   {
@@ -266,7 +266,7 @@
   {
     "state_name": "utah",
     "abbreviation": "UT",
-    "capital": "Salt_Lake_City",
+    "capital": "Salt Lake City",
     "zip": "84101"
   },
   {

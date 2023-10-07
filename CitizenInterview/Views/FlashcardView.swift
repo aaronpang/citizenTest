@@ -54,6 +54,7 @@ struct FlashcardView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .frame(alignment: .bottom)
+                .padding(.bottom)
             } else {
                 HStack {
                     Button {
@@ -77,6 +78,7 @@ struct FlashcardView: View {
                     .frame(alignment: .bottom)
                     .tint(Color.green)
                 }
+                .padding(.bottom)
             }
             Button {
                 guard let previousQuestion = questionsSeenOrdered.last else { return }
@@ -84,10 +86,9 @@ struct FlashcardView: View {
                 questionCounter = previousQuestion
                 questionsSeenOrdered.removeLast()
                 updateQuestionAndAnswer()
-
             } label: {
                 Text("Previous Question")
-                    .frame(maxWidth: .infinity, minHeight: 30)
+                    .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderless)
             .frame(alignment: .bottom)
