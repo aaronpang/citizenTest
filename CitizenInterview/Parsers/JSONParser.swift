@@ -29,11 +29,42 @@ class JSONParser {
 
     class func parseStateCapitals() -> [String: String]? {
         do {
-            if let bundlePath = Bundle.main.path(forResource: "Capitals", ofType: "json"),
+            if let bundlePath = Bundle.main.path(forResource: "States", ofType: "json"),
                let jsonData = try String(contentsOfFile: bundlePath).data(using: .utf8)
             {
                 do {
-                    let stateToCapitals: [String: String] = try JSONDecoder().decode([String: String].self, from: jsonData)
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    let states: [StateModel] = try decoder.decode([StateModel].self, from: jsonData)
+                    var stateToCapitals: [String: String] = [:]
+                    for state in states {
+                        stateToCapitals[state.abbreviation] = state.capital
+                    }
+                    return stateToCapitals
+                } catch {
+                    print(error)
+                }
+            }
+            return nil
+        } catch {
+            print(error)
+            return nil
+        }
+    }
+
+    class func parseStatesForName() -> [String: StateModel]? {
+        do {
+            if let bundlePath = Bundle.main.path(forResource: "States", ofType: "json"),
+               let jsonData = try String(contentsOfFile: bundlePath).data(using: .utf8)
+            {
+                do {
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    let states: [StateModel] = try decoder.decode([StateModel].self, from: jsonData)
+                    var stateToCapitals: [String: StateModel] = [:]
+                    for state in states {
+                        stateToCapitals[state.stateName] = state
+                    }
                     return stateToCapitals
                 } catch {
                     print(error)

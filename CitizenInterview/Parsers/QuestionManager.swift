@@ -175,7 +175,7 @@ class QuestionManager {
                                                         vicePresident: vicePresident,
                                                         governor: governor,
                                                         capital: capital,
-                                                        speakerOfHouse: "Kevin McCarthy",
+                                                        speakerOfHouse: "Patrick McHenry",
                                                         numberOfSupremeCourtJustices: 9,
                                                         chiefJustice: "John Roberts") // Don't hard code these
                 // Cache the information per zip code with a timeout of 2 months so we don't fetch every time the user taps on Begin Quiz
@@ -202,7 +202,7 @@ class QuestionManager {
             official.name
         }
         if names.count <= 0 {
-            return [String(format: "There are no %@s for the address: %@", role.rawValue, location)]
+            return ["Unable to retrieve information. Please visit the (USCIS government website)[uscis.gov/citizenship/testupdates] for updates."]
         }
         return names
     }

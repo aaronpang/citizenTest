@@ -10,16 +10,22 @@ import SwiftUI
 struct SettingsView: View {
     @Binding var orderedQuestionsUnranked: Bool
     @Binding var isAbove65: Bool
+    @Binding var selectedState: AmericanState
 
     @State var showAllQuestionsList: Bool
     @State var answerModel: DynamicAnswerResultsModel?
     @State var isLoading: Bool = false
     let locationManager: LocationManager
 
-    init(orderedQuestionsUnranked: Binding<Bool>, isAbove65: Binding<Bool>, locationManager: LocationManager) {
+    init(orderedQuestionsUnranked: Binding<Bool>,
+         isAbove65: Binding<Bool>,
+         locationManager: LocationManager,
+         selectedState: Binding<AmericanState>)
+    {
         self._orderedQuestionsUnranked = orderedQuestionsUnranked
         self._isAbove65 = isAbove65
         self._showAllQuestionsList = State(initialValue: false)
+        self._selectedState = selectedState
         self.locationManager = locationManager
     }
 
@@ -45,6 +51,9 @@ struct SettingsView: View {
                     }
                     Button {
                         isLoading = true
+                        if locationManager.location.isEmpty {
+                            locationManager.replaceLocationWithBackupState(backupState: selectedState)
+                        }
                         QuestionManager.fetchData(locationManager: locationManager,
                                                   completion: { dynamicAnswers, error in
                                                       isLoading = false
@@ -57,7 +66,7 @@ struct SettingsView: View {
                                                   })
                     } label: {
                         if isLoading {
-                            ProgressView().frame(minWidth: 100, minHeight: 40)
+                            ProgressView().frame(minWidth: 50)
                         } else {
                             Text("Show All")
                         }

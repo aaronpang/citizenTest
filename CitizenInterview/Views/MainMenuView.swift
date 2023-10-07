@@ -24,51 +24,64 @@ struct MainMenuView: View {
 
     @StateObject var locationManager = LocationManager()
 
-    enum AmericanState: String, CaseIterable, Identifiable {
-        case alabama, alaska, arizona, arkansas, california, colorado, connecticut, delaware, florida, georgia, hawaii, idaho, illinois, indiana, iowa, kansas, kentucky, louisiana, maine, maryland, massachusetts, michigan, minnesota, mississippi, missouri, montana, nebraska, nevada, new_hampshire, new_jersey, new_mexico, new_york, north_carolina, north_dakota, ohio, oklahoma, oregon, pennsylvania, rhode_island, south_carolina, south_dakota, tennessee, texas, utah, vermont, virginia, washington, west_virginia, wisconsin, wyoming
-        var id: Self { self }
-    }
-
     var body: some View {
         let imageSize = UIScreen.main.bounds.size.width / 2
         NavigationStack {
             VStack(alignment: .leading) {
                 VStack(alignment: .center) {
-                    Image("main_menu_image", label: Text("hello!"))
+                    Image("main_menu_image")
                         .resizable()
                         .frame(width: imageSize, height: imageSize, alignment: .center)
                         .clipShape(.circle)
-                    Text("This is an unofficial app that can help you prepare for the USCIS naturalization interview.\n\nIt is absolutely free of charge and built with love and care ❤️.")
+                    Text("This is an unofficial app that can help you prepare for the Civics portion of the USCIS naturalization interview.")
                         .fixedSize(horizontal: false, vertical: true)
-                        .padding()
+                        .padding(.horizontal)
+                        .padding(.top)
                 }
                 .frame(maxWidth: .infinity)
-                Spacer().frame(maxHeight: .infinity)
                 if locationManager.authorization == .authorizedAlways || locationManager.authorization == .authorizedWhenInUse {
-                    Text(String(format: "Current location: %@", locationManager.shortenedLocation)).frame(maxWidth:.infinity, alignment: .center)
+                    Text("It is absolutely free of charge and built with love and care ❤️.")
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding()
+                    Spacer().frame(maxHeight: .infinity)
+                    Text(String(format: "Current location: %@", locationManager.shortenedLocation))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.caption)
+                        .padding()
                 } else if locationManager.authorization == .notDetermined {
-                    Text("Please accept the location access so we can provide to you the most accurate information for your studies")
-                    Toggle("Location Enabled", isOn: $locationEnabled)
-                        .toggleStyle(.switch)
-                        .frame(alignment: .bottom).padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
-                        .tint(Color(UIColor.systemBlue))
-                        .onChange(of: locationEnabled) { _ in
+                    VStack(alignment: .leading) {
+                        Text(String(format:"Please accept location access so we can provide to you the most accurate information for your studies. If none provided, we default to '%@'", selectedState.rawValue.capitalized) )
+                            .fixedSize(horizontal: false, vertical: true)
+
+                        Button {
                             locationManager.manager.requestWhenInUseAuthorization()
+                        } label: {
+                            Text("Enable Location")
                         }
+                        .buttonStyle(.bordered)
+                    }
+                    .padding()
+                    Spacer().frame(maxHeight: .infinity)
                 } else {
-                    Picker("Pick Your State", selection: $selectedState, content: {
+                    Text("*Since you declined location access, we will fetch the information based on the capital location of the provided state.*")
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding()
+                    Picker("Choose State", selection: $selectedState, content: {
                         ForEach(AmericanState.allCases) { americanState in
                             Text(americanState.rawValue.capitalized.replacingOccurrences(of: "_", with: " "))
                         }
                     })
-                    .pickerStyle(.wheel)
-                    .onChange(of: selectedState) { _ in
-                    }
+                    .pickerStyle(.navigationLink)
+                    .padding()
+                    Spacer().frame(maxHeight: .infinity)
                 }
                 // If the user declines the location, then show a picker for them to pick the state
                 Button {
                     // Fetch the info on the state-specific questions
                     isLoading = true
+                    if locationManager.location.isEmpty {
+                        locationManager.replaceLocationWithBackupState(backupState: selectedState)
+                    }
                     QuestionManager.fetchData(locationManager: locationManager,
                                               completion: { dynamicAnswers, error in
                                                   isLoading = false
@@ -84,18 +97,19 @@ struct MainMenuView: View {
                         ProgressView().frame(maxWidth: .infinity, minHeight: 40)
                             .tint(.white)
                     } else {
-                        Text("Begin Quiz")
+                        Text("Begin Civics Quiz")
                             .frame(maxWidth: .infinity, minHeight: 40)
                     }
                 }
                 .buttonStyle(.borderedProminent)
                 .tint(Color(UIColor.systemBlue.withAlphaComponent(isLoading ? 0.8 : 1.0)))
                 .frame(alignment: .bottom)
-                .padding()
+                .padding(.horizontal)
+                .padding(.bottom)
                 Button {
                     showChecklist.toggle()
                 } label: {
-                    Text("Checklist on Day of Interview")
+                    Text("Checklist for Day of Interview")
                         .frame(maxWidth: .infinity, minHeight: 20)
                 }
             }
@@ -107,7 +121,10 @@ struct MainMenuView: View {
                 AboutView()
             }
             .navigationDestination(isPresented: $showSettings) {
-                SettingsView(orderedQuestionsUnranked: $orderedQuestionsUnranked, isAbove65: $isAbove65, locationManager: locationManager)
+                SettingsView(orderedQuestionsUnranked: $orderedQuestionsUnranked,
+                             isAbove65: $isAbove65,
+                             locationManager: locationManager,
+                             selectedState: $selectedState)
             }
             .navigationDestination(isPresented: $showChecklist) {
                 ChecklistView()
@@ -162,6 +179,9 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         authorization = manager.authorizationStatus
+        if authorization == .authorizedWhenInUse || authorization == .authorizedAlways {
+            manager.requestLocation()
+        }
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -190,6 +210,17 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             self.location = "\(streetNumber ?? "")\(streetName ?? "")\n\(city), \(state) \(zipCode)"
             self.shortenedLocation = "\(city), \(state)"
         }
+    }
+
+    func replaceLocationWithBackupState(backupState: AmericanState) {
+        guard let statesForName = JSONParser.parseStatesForName(),
+              let stateObject = statesForName[backupState.rawValue]
+        else {
+            return // Error here, shouldn't happen though because we should be able to handle all selected states in the JSON (write test to ensure this)
+        }
+        location = stateObject.capital
+        zipCode = stateObject.zip
+        state = stateObject.abbreviation
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {}

@@ -1,0 +1,308 @@
+[
+  {
+    "state_name": "alabama",
+    "abbreviation": "AL",
+    "capital": "Montgomery",
+    "zip": "36101"
+  },
+  {
+    "state_name": "alaska",
+    "abbreviation": "AK",
+    "capital": "Juneau",
+    "zip": "99801"
+  },
+  {
+    "state_name": "arizona",
+    "abbreviation": "AZ",
+    "capital": "Phoenix",
+    "zip": "85001"
+  },
+  {
+    "state_name": "arkansas",
+    "abbreviation": "AR",
+    "capital": "Little Rock",
+    "zip": "72201"
+  },
+  {
+    "state_name": "california",
+    "abbreviation": "CA",
+    "capital": "Sacramento",
+    "zip": "94203"
+  },
+  {
+    "state_name": "colorado",
+    "abbreviation": "CO",
+    "capital": "Denver",
+    "zip": "80201"
+  },
+  {
+    "state_name": "connecticut",
+    "abbreviation": "CT",
+    "capital": "Hartford",
+    "zip": "06101"
+  },
+  {
+    "state_name": "delaware",
+    "abbreviation": "DE",
+    "capital": "Dover",
+    "zip": "19901"
+  },
+  {
+    "state_name": "district_of_columbia",
+    "abbreviation": "DC",
+    "capital": "Washington",
+    "zip": "20001"
+  },
+  {
+    "state_name": "florida",
+    "abbreviation": "FL",
+    "capital": "Tallahassee",
+    "zip": "32301"
+  },
+  {
+    "state_name": "georgia",
+    "abbreviation": "GA",
+    "capital": "Atlanta",
+    "zip": "30301"
+  },
+  {
+    "state_name": "hawaii",
+    "abbreviation": "HI",
+    "capital": "Honolulu",
+    "zip": "96801"
+  },
+  {
+    "state_name": "idaho",
+    "abbreviation": "ID",
+    "capital": "Boise",
+    "zip": "83701"
+  },
+  {
+    "state_name": "illinois",
+    "abbreviation": "IL",
+    "capital": "Springfield",
+    "zip": "62701"
+  },
+  {
+    "state_name": "indiana",
+    "abbreviation": "IN",
+    "capital": "Indianapolis",
+    "zip": "46201"
+  },
+  {
+    "state_name": "iowa",
+    "abbreviation": "IA",
+    "capital": "Des_Moines",
+    "zip": "50301"
+  },
+  {
+    "state_name": "kansas",
+    "abbreviation": "KS",
+    "capital": "Topeka",
+    "zip": "66601"
+  },
+  {
+    "state_name": "kentucky",
+    "abbreviation": "KY",
+    "capital": "Frankfort",
+    "zip": "40601"
+  },
+  {
+    "state_name": "louisiana",
+    "abbreviation": "LA",
+    "capital": "Baton_Rouge",
+    "zip": "70801"
+  },
+  {
+    "state_name": "maine",
+    "abbreviation": "ME",
+    "capital": "Augusta",
+    "zip": "04330"
+  },
+  {
+    "state_name": "maryland",
+    "abbreviation": "MD",
+    "capital": "Annapolis",
+    "zip": "21401"
+  },
+  {
+    "state_name": "massachusetts",
+    "abbreviation": "MA",
+    "capital": "Boston",
+    "zip": "02108"
+  },
+  {
+    "state_name": "michigan",
+    "abbreviation": "MI",
+    "capital": "Lansing",
+    "zip": "48901"
+  },
+  {
+    "state_name": "minnesota",
+    "abbreviation": "MN",
+    "capital": "St._Paul",
+    "zip": "55101"
+  },
+  {
+    "state_name": "mississippi",
+    "abbreviation": "MS",
+    "capital": "Jackson",
+    "zip": "39201"
+  },
+  {
+    "state_name": "missouri",
+    "abbreviation": "MO",
+    "capital": "Jefferson_City",
+    "zip": "65101"
+  },
+  {
+    "state_name": "montana",
+    "abbreviation": "MT",
+    "capital": "Helena",
+    "zip": "59601"
+  },
+  {
+    "state_name": "nebraska",
+    "abbreviation": "NE",
+    "capital": "Lincoln",
+    "zip": "68501"
+  },
+  {
+    "state_name": "nevada",
+    "abbreviation": "NV",
+    "capital": "Carson_City",
+    "zip": "89701"
+  },
+  {
+    "state_name": "new_hampshire",
+    "abbreviation": "NH",
+    "capital": "Concord",
+    "zip": "03301"
+  },
+  {
+    "state_name": "new_jersey",
+    "abbreviation": "NJ",
+    "capital": "Trenton",
+    "zip": "08601"
+  },
+  {
+    "state_name": "new_mexico",
+    "abbreviation": "NM",
+    "capital": "Santa_Fe",
+    "zip": "87501"
+  },
+  {
+    "state_name": "new_york",
+    "abbreviation": "NY",
+    "capital": "Albany",
+    "zip": "12201"
+  },
+  {
+    "state_name": "north_carolina",
+    "abbreviation": "NC",
+    "capital": "Raleigh",
+    "zip": "27601"
+  },
+  {
+    "state_name": "north_dakota",
+    "abbreviation": "ND",
+    "capital": "Bismarck",
+    "zip": "58501"
+  },
+  {
+    "state_name": "ohio",
+    "abbreviation": "OH",
+    "capital": "Columbus",
+    "zip": "43201"
+  },
+  {
+    "state_name": "oklahoma",
+    "abbreviation": "OK",
+    "capital": "Oklahoma_City",
+    "zip": "73101"
+  },
+  {
+    "state_name": "oregon",
+    "abbreviation": "OR",
+    "capital": "Salem",
+    "zip": "93701"
+  },
+  {
+    "state_name": "pennsylvania",
+    "abbreviation": "PA",
+    "capital": "Harrisburg",
+    "zip": "17101"
+  },
+  {
+    "state_name": "rhode_island",
+    "abbreviation": "RI",
+    "capital": "Providence",
+    "zip": "02901"
+  },
+  {
+    "state_name": "south_carolina",
+    "abbreviation": "SC",
+    "capital": "Columbia",
+    "zip": "29201"
+  },
+  {
+    "state_name": "south_dakota",
+    "abbreviation": "SD",
+    "capital": "Pierre",
+    "zip": "57501"
+  },
+  {
+    "state_name": "tennessee",
+    "abbreviation": "TN",
+    "capital": "Nashville",
+    "zip": "37201"
+  },
+  {
+    "state_name": "texas",
+    "abbreviation": "TX",
+    "capital": "Austin",
+    "zip": "73301"
+  },
+  {
+    "state_name": "utah",
+    "abbreviation": "UT",
+    "capital": "Salt_Lake_City",
+    "zip": "84101"
+  },
+  {
+    "state_name": "vermont",
+    "abbreviation": "VT",
+    "capital": "Montpelier",
+    "zip": "05601"
+  },
+  {
+    "state_name": "virginia",
+    "abbreviation": "VA",
+    "capital": "Richmond",
+    "zip": "23218"
+  },
+  {
+    "state_name": "washington",
+    "abbreviation": "WA",
+    "capital": "Olympia",
+    "zip": "98501"
+  },
+  {
+    "state_name": "west_virginia",
+    "abbreviation": "WV",
+    "capital": "Charleston",
+    "zip": "25301"
+  },
+  {
+    "state_name": "wisconsin",
+    "abbreviation": "WI",
+    "capital": "Madison",
+    "zip": "53701"
+  },
+  {
+    "state_name": "wyoming",
+    "abbreviation": "WY",
+    "capital": "Cheyenne",
+    "zip": "82001"
+  }
+]

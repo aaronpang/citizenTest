@@ -16,10 +16,10 @@ class DynamicAnswerParser {
             // Convert answer tokens from dynamic answer model
             let convertedAnswer = convertAnswerTokens(answer: answer, answerModel: answerModel)
             // If answer is a certain key then pull the dynamic data that way
-            answerString.append((appendHyphen ? "- " : "") + convertedAnswer.localizedCapitalized + "\n")
+            answerString.append((appendHyphen ? " \u{2022} " : "") + convertedAnswer.localizedCapitalized + "\n")
         }
         // Remove the final \n
-        answerString = answerString.trimmingCharacters(in: .whitespacesAndNewlines)
+        answerString = answerString.trimmingCharacters(in: .newlines)
         return answerString
     }
 
@@ -37,14 +37,14 @@ class DynamicAnswerParser {
             var senatorString = ""
             let appendHyphen = answerModel.senators.count > 1
             answerModel.senators.forEach { senator in
-                senatorString.append((appendHyphen ? " - " : "") + senator.localizedCapitalized + "\n")
+                senatorString.append((appendHyphen ? " \u{2022} " : "") + senator.localizedCapitalized + "\n")
             }
             newAnswer = senatorString
         } else if newAnswer == "$representatives" {
             var representativeString = ""
-            let appendHyphen = answerModel.senators.count > 1
+            let appendHyphen = answerModel.representatives.count > 1
             answerModel.representatives.forEach { representative in
-                representativeString.append((appendHyphen ? " - " : "") + representative.localizedCapitalized + "\n")
+                representativeString.append((appendHyphen ? " \u{2022} " : "") + representative.localizedCapitalized + "\n")
             }
             newAnswer = representativeString
         }

@@ -46,6 +46,6 @@ struct ChecklistView: View {
         Text("This is only guidance for a list of items you should bring to your naturalization interview. It is not a comprehensive list and in some cases, USCIS may ask you to bring additional documents to the interview.").padding(.horizontal).padding(.top)
         List(checkListData) { item in
             CheckView(isChecked: item.isChecked, title: item.title)
-        }.navigationBarTitle("Day Of Checklist")    
+        }.navigationBarTitle("Interview Checklist")    
     }
 }
