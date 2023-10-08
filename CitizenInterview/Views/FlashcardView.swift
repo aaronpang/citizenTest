@@ -55,7 +55,7 @@ struct FlashcardView: View {
                     }
                 }
             }.frame(maxHeight: .infinity, alignment: .top)
-            Text(String(format: "Score: %d/%d", questionsAnsweredCorrectly.count, questionsSeenOrdered.count))
+            Text(String(format: "Questions Answered Correctly: (%d/%d)", questionsAnsweredCorrectly.count, questionsSeenOrdered.count))
             if !showAnswer {
                 Button {
                     showAnswer = true
@@ -120,13 +120,13 @@ struct FlashcardView: View {
             questionIndex = 0
             updateQuestionAndAnswer()
         }
-        .alert("Completed all 100 questions", isPresented: $showAlert) {
+        .alert("Completed all questions", isPresented: $showAlert) {
             Button("Don't show this again") {
                 UserDefaults.standard.set(true, forKey: "alert_when_hit_100")
             }
             Button("Okay", role: .cancel) {}
         } message: {
-            Text("You have completed all 100 questions, we will now show questions you've seen before again/")
+            Text("You have completed all the questions in the question pool, we will now show questions you've seen before/")
         }
     }
 
