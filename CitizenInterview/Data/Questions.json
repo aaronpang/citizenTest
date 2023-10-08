@@ -3,7 +3,7 @@
     "question_id": 1,
     "question": "What is the supreme law of the land?",
     "answers": [
-      "the Constitution"
+      "The Constitution"
     ],
     "above_65_question": false
   },
@@ -11,9 +11,9 @@
     "question_id": 2,
     "question": "What does the Constitution do?",
     "answers": [
-      "sets up the government",
-      "defines the government",
-      "protects basic rights of Americans"
+      "Sets up the government",
+      "Defines the government",
+      "Protects basic rights of Americans"
     ],
     "above_65_question": false
   },
@@ -29,8 +29,8 @@
     "question_id": 4,
     "question": "What is an amendment?",
     "answers": [
-      "a change (to the Constitution)",
-      "an addition (to the Constitution)"
+      "A change (to the Constitution)",
+      "An addition (to the Constitution)"
     ],
     "above_65_question": false
   },
@@ -38,7 +38,7 @@
     "question_id": 5,
     "question": "What do we call the first ten amendments to the Constitution?",
     "answers": [
-      "the Bill of Rights"
+      "The Bill of Rights"
     ],
     "above_65_question": false
   },
@@ -46,11 +46,11 @@
     "question_id": 6,
     "question": "What is one right or freedom from the First Amendment?",
     "answers": [
-      "speech",
-      "religion",
-      "assembly",
-      "press",
-      "petition the government"
+      "Speech",
+      "Religion",
+      "Assembly",
+      "Press",
+      "Petition the government"
     ],
     "above_65_question": true
   },
@@ -58,7 +58,7 @@
     "question_id": 7,
     "question": "How many amendments does the Constitution have?",
     "answers": [
-      "twenty-seven (27)"
+      "Twenty-seven (27)"
     ],
     "above_65_question": false
   },
@@ -66,9 +66,9 @@
     "question_id": 8,
     "question": "What did the Declaration of Independence do?",
     "answers": [
-      "announced our independence (from Great Britain)",
-      "declared our independence (from Great Britain)",
-      "said that the United States is free (from Great Britain)"
+      "Announced our independence (from Great Britain)",
+      "Declared our independence (from Great Britain)",
+      "Said that the United States is free (from Great Britain)"
     ],
     "above_65_question": false
   },
@@ -76,9 +76,9 @@
     "question_id": 9,
     "question": "What are two rights in the Declaration of Independence?",
     "answers": [
-      "life",
-      "liberty",
-      "pursuit of happiness"
+      "Life",
+      "Liberty",
+      "Pursuit of happiness"
     ],
     "above_65_question": false
   },
@@ -94,8 +94,8 @@
     "question_id": 11,
     "question": "What is the economic system in the United States?",
     "answers": [
-      "capitalist economy",
-      "market economy"
+      "Capitalist economy",
+      "Market economy"
     ],
     "above_65_question": true
   },
@@ -115,11 +115,11 @@
     "question": "Name one branch or part of the government.",
     "answers": [
       "Congress",
-      "legislative",
+      "Legislative",
       "President",
-      "executive",
-      "the courts",
-      "judicial"
+      "Executive",
+      "The courts",
+      "Judicial"
     ],
     "above_65_question": true
   },
@@ -127,8 +127,8 @@
     "question_id": 14,
     "question": "What stops one branch of government from becoming too powerful?",
     "answers": [
-      "checks and balances",
-      "separation of powers"
+      "Checks and balances",
+      "Separation of powers"
     ],
     "above_65_question": false
   },
@@ -136,7 +136,7 @@
     "question_id": 15,
     "question": "Who is in charge of the executive branch?",
     "answers": [
-      "the President"
+      "The President"
     ],
     "above_65_question": false
   },
@@ -154,7 +154,7 @@
     "question_id": 17,
     "question": "What are the two parts of the U.S. Congress?",
     "answers": [
-      "the Senate and House (of Representatives)"
+      "The Senate and House (of Representatives)"
     ],
     "above_65_question": true
   },
@@ -162,7 +162,7 @@
     "question_id": 18,
     "question": "How many U.S. Senators are there?",
     "answers": [
-      "one hundred (100)"
+      "One hundred (100)"
     ],
     "above_65_question": false
   },
@@ -170,7 +170,7 @@
     "question_id": 19,
     "question": "We elect a U.S. Senator for how many years?",
     "answers": [
-      "six (6)"
+      "Six (6)"
     ],
     "above_65_question": false
   },
@@ -186,7 +186,7 @@
     "question_id": 21,
     "question": "The House of Representatives has how many voting members?",
     "answers": [
-      "four hundred thirty-five (435)"
+      "Four hundred thirty-five (435)"
     ],
     "above_65_question": false
   },
@@ -194,7 +194,7 @@
     "question_id": 22,
     "question": "We elect a U.S. Representative for how many years?",
     "answers": [
-      "two (2)"
+      "Two (2)"
     ],
     "above_65_question": false
   },
@@ -210,7 +210,7 @@
     "question_id": 24,
     "question": "Who does a U.S. Senator represent?",
     "answers": [
-      "all people of the state"
+      "All people of the state"
     ],
     "above_65_question": false
   },
@@ -218,9 +218,9 @@
     "question_id": 25,
     "question": "Why do some states have more Representatives than other states?",
     "answers": [
-      "(because of) the state's population",
-      "(because) they have more people",
-      "(because) some states have more people"
+      "(Because of) the state's population",
+      "(Because) they have more people",
+      "(Because) some states have more people"
     ],
     "above_65_question": false
   },
@@ -228,7 +228,7 @@
     "question_id": 26,
     "question": "We elect a President for how many years?",
     "answers": [
-      "four (4)"
+      "Four (4)"
     ],
     "above_65_question": false
   },
@@ -260,7 +260,7 @@
     "question_id": 30,
     "question": "If the President can no longer serve, who becomes President?",
     "answers": [
-      "the Vice President"
+      "The Vice President"
     ],
     "above_65_question": false
   },
@@ -268,7 +268,7 @@
     "question_id": 31,
     "question": "If both the President and the Vice President can no longer serve, who becomes President?",
     "answers": [
-      "the Speaker of the House"
+      "The Speaker of the House"
     ],
     "above_65_question": false
   },
@@ -276,7 +276,7 @@
     "question_id": 32,
     "question": "Who is the Commander in Chief of the military?",
     "answers": [
-      "the President"
+      "The President"
     ],
     "above_65_question": false
   },
@@ -284,7 +284,7 @@
     "question_id": 33,
     "question": "Who signs bills to become laws?",
     "answers": [
-      "the President"
+      "The President"
     ],
     "above_65_question": false
   },
@@ -292,7 +292,7 @@
     "question_id": 34,
     "question": "Who vetoes bills?",
     "answers": [
-      "the President"
+      "The President"
     ],
     "above_65_question": false
   },
@@ -300,7 +300,7 @@
     "question_id": 35,
     "question": "What does the President's Cabinet do?",
     "answers": [
-      "advises the President"
+      "Advises the President"
     ],
     "above_65_question": false
   },
@@ -331,10 +331,10 @@
     "question_id": 37,
     "question": "What does the judicial branch do?",
     "answers": [
-      "reviews laws",
-      "explains laws",
-      "resolves disputes (disagreements)",
-      "decides if a law goes against the Constitution"
+      "Reviews laws",
+      "Explains laws",
+      "Resolves disputes (disagreements)",
+      "Decides if a law goes against the Constitution"
     ],
     "above_65_question": false
   },
@@ -342,7 +342,7 @@
     "question_id": 38,
     "question": "What is the highest court in the United States?",
     "answers": [
-      "the Supreme Court"
+      "The Supreme Court"
     ],
     "above_65_question": false
   },
@@ -366,10 +366,10 @@
     "question_id": 41,
     "question": "Under our Constitution, some powers belong to the federal government. What is one power of the federal government?",
     "answers": [
-      "to print money",
-      "to declare war",
-      "to create an army",
-      "to make treaties"
+      "To print money",
+      "To declare war",
+      "To create an army",
+      "To make treaties"
     ],
     "above_65_question": false
   },
@@ -377,11 +377,11 @@
     "question_id": 42,
     "question": "Under our Constitution, some powers belong to the states. What is one power of the states?",
     "answers": [
-      "provide schooling and education",
-      "provide protection (police)",
-      "provide safety (fire departments)",
-      "give a driver's license",
-      "approve zoning and land use"
+      "Provide schooling and education",
+      "Provide protection (police)",
+      "Provide safety (fire departments)",
+      "Give a driver's license",
+      "Approve zoning and land use"
     ],
     "above_65_question": false
   },
@@ -440,8 +440,8 @@
     "question_id": 49,
     "question": "What is one responsibility that is only for United States citizens?",
     "answers": [
-      "serve on a jury",
-      "vote in a federal election"
+      "Serve on a jury",
+      "Vote in a federal election"
     ],
     "above_65_question": false
   },
@@ -449,8 +449,8 @@
     "question_id": 50,
     "question": "Name one right only for United States citizens.",
     "answers": [
-      "vote in a federal election",
-      "run for federal office"
+      "Vote in a federal election",
+      "Run for federal office"
     ],
     "above_65_question": false
   },
@@ -458,12 +458,12 @@
     "question_id": 51,
     "question": "What are two rights of everyone living in the United States?",
     "answers": [
-      "freedom of expression",
-      "freedom of speech",
-      "freedom of assembly",
-      "freedom to petition the government",
-      "freedom of religion",
-      "the right to bear arms"
+      "Freedom of expression",
+      "Freedom of speech",
+      "Freedom of assembly",
+      "Freedom to petition the government",
+      "Freedom of religion",
+      "The right to bear arms"
     ],
     "above_65_question": false
   },
@@ -471,8 +471,8 @@
     "question_id": 52,
     "question": "What do we show loyalty to when we say the Pledge of Allegiance?",
     "answers": [
-      "the United States",
-      "the flag"
+      "The United States",
+      "The flag"
     ],
     "above_65_question": false
   },
@@ -480,12 +480,12 @@
     "question_id": 53,
     "question": "What is one promise you make when you become a United States citizen?",
     "answers": [
-      "give up loyalty to other countries",
-      "defend the Constitution and laws of the United States",
-      "obey the laws of the United States",
-      "serve in the U.S. military (if needed)",
-      "serve (do important work for) the nation (if needed)",
-      "be loyal to the United States"
+      "Give up loyalty to other countries",
+      "Defend the Constitution and laws of the United States",
+      "Obey the laws of the United States",
+      "Serve in the U.S. military (if needed)",
+      "Serve (do important work for) the nation (if needed)",
+      "Be loyal to the United States"
     ],
     "above_65_question": false
   },
@@ -493,7 +493,7 @@
     "question_id": 54,
     "question": "How old do citizens have to be to vote for President?",
     "answers": [
-      "eighteen (18) and older"
+      "Eighteen (18) and older"
     ],
     "above_65_question": true
   },
@@ -501,16 +501,16 @@
     "question_id": 55,
     "question": "What are two ways that Americans can participate in their democracy?",
     "answers": [
-      "vote",
-      "join a political party",
-      "help with a campaign",
-      "join a civic group",
-      "join a community group",
-      "give an elected official your opinion on an issue",
-      "call Senators and Representatives",
-      "publicly support or oppose an issue or policy",
-      "run for office",
-      "write to a newspaper"
+      "Vote",
+      "Join a political party",
+      "Help with a campaign",
+      "Join a civic group",
+      "Join a community group",
+      "Give an elected official your opinion on an issue",
+      "Call Senators and Representatives",
+      "Publicly support or oppose an issue or policy",
+      "Run for office",
+      "Write to a newspaper"
     ],
     "above_65_question": false
   },
@@ -526,8 +526,8 @@
     "question_id": 57,
     "question": "When must all men register for the Selective Service?",
     "answers": [
-      "at age eighteen (18)",
-      "between eighteen (18) and twenty-six (26)"
+      "At age eighteen (18)",
+      "Between eighteen (18) and twenty-six (26)"
     ],
     "above_65_question": false
   },
@@ -535,12 +535,12 @@
     "question_id": 58,
     "question": "What is one reason colonists came to America?",
     "answers": [
-      "freedom",
-      "political liberty",
-      "religious freedom",
-      "economic opportunity",
-      "practice their religion",
-      "escape persecution"
+      "Freedom",
+      "Political liberty",
+      "Religious freedom",
+      "Economic opportunity",
+      "Practice their religion",
+      "Escape persecution"
     ],
     "above_65_question": false
   },
@@ -558,7 +558,7 @@
     "question": "What group of people was taken to America and sold as slaves?",
     "answers": [
       "Africans",
-      "people from Africa"
+      "People from Africa"
     ],
     "above_65_question": false
   },
@@ -566,9 +566,9 @@
     "question_id": 61,
     "question": "Why did the colonists fight the British?",
     "answers": [
-      "because of high taxes (taxation without representation)",
-      "because the British army stayed in their houses (boarding, quartering)",
-      "because they didn't have self-government"
+      "Because of high taxes (taxation without representation)",
+      "Because the British army stayed in their houses (boarding, quartering)",
+      "Because they didn't have self-government"
     ],
     "above_65_question": false
   },
@@ -641,10 +641,10 @@
     "question": "What is one thing Benjamin Franklin is famous for?",
     "answers": [
       "U.S. diplomat",
-      "oldest member of the Constitutional Convention",
-      "first Postmaster General of the United States",
-      "writer of 'Poor Richard's Almanac'",
-      "started the first free libraries"
+      "Oldest member of the Constitutional Convention",
+      "First Postmaster General of the United States",
+      "Writer of 'Poor Richard's Almanac'",
+      "Started the first free libraries"
     ],
     "above_65_question": false
   },
@@ -668,7 +668,7 @@
     "question_id": 71,
     "question": "What territory did the United States buy from France in 1803?",
     "answers": [
-      "the Louisiana Territory",
+      "The Louisiana Territory",
       "Louisiana"
     ],
     "above_65_question": false
@@ -688,8 +688,8 @@
     "question_id": 73,
     "question": "Name the U.S. war between the North and the South.",
     "answers": [
-      "the Civil War",
-      "the War between the States"
+      "The Civil War",
+      "The War between the States"
     ],
     "above_65_question": false
   },
@@ -697,9 +697,9 @@
     "question_id": 74,
     "question": "Name one problem that led to the Civil War.",
     "answers": [
-      "slavery",
-      "economic reasons",
-      "states' rights"
+      "Slavery",
+      "Economic reasons",
+      "States' rights"
     ],
     "above_65_question": false
   },
@@ -707,9 +707,9 @@
     "question_id": 75,
     "question": "What was one important thing that Abraham Lincoln did?",
     "answers": [
-      "freed the slaves (Emancipation Proclamation)",
-      "saved (or preserved) the Union",
-      "led the United States during the Civil War"
+      "Freed the slaves (Emancipation Proclamation)",
+      "Saved (or preserved) the Union",
+      "Led the United States during the Civil War"
     ],
     "above_65_question": true
   },
@@ -717,10 +717,10 @@
     "question_id": 76,
     "question": "What did the Emancipation Proclamation do?",
     "answers": [
-      "freed the slaves",
-      "freed slaves in the Confederacy",
-      "freed slaves in the Confederate states",
-      "freed slaves in most Southern states"
+      "Freed the slaves",
+      "Freed slaves in the Confederacy",
+      "Freed slaves in the Confederate states",
+      "Freed slaves in most Southern states"
     ],
     "above_65_question": false
   },
@@ -728,8 +728,8 @@
     "question_id": 77,
     "question": "What did Susan B. Anthony do?",
     "answers": [
-      "fought for women's rights",
-      "fought for civil rights"
+      "Fought for women's rights",
+      "Fought for civil rights"
     ],
     "above_65_question": false
   },
@@ -789,7 +789,7 @@
     "question_id": 84,
     "question": "What movement tried to end racial discrimination?",
     "answers": [
-      "civil rights (movement)"
+      "Civil rights (movement)"
     ],
     "above_65_question": false
   },
@@ -797,8 +797,8 @@
     "question_id": 85,
     "question": "What did Martin Luther King, Jr. do?",
     "answers": [
-      "fought for civil rights",
-      "worked for equality for all Americans"
+      "Fought for civil rights",
+      "Worked for equality for all Americans"
     ],
     "above_65_question": true
   },
@@ -929,8 +929,8 @@
     "question_id": 96,
     "question": "Why does the flag have 13 stripes?",
     "answers": [
-      "because there were 13 original colonies",
-      "because the stripes represent the original colonies"
+      "Because there were 13 original colonies",
+      "Because the stripes represent the original colonies"
     ],
     "above_65_question": false
   },
@@ -938,9 +938,9 @@
     "question_id": 97,
     "question": "Why does the flag have 50 stars?",
     "answers": [
-      "because there is one star for each state",
-      "because each star represents a state",
-      "because there are 50 states"
+      "Because there is one star for each state",
+      "Because each star represents a state",
+      "Because there are 50 states"
     ],
     "above_65_question": true
   },

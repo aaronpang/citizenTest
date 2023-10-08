@@ -16,7 +16,7 @@ class DynamicAnswerParser {
             // Convert answer tokens from dynamic answer model
             let convertedAnswer = convertAnswerTokens(answer: answer, answerModel: answerModel)
             // If answer is a certain key then pull the dynamic data that way
-            answerString.append((appendHyphen ? " \u{2022} " : "") + convertedAnswer.localizedCapitalized + "\n")
+            answerString.append((appendHyphen ? " \u{2022} " : "") + convertedAnswer + "\n")
         }
         // Remove the final \n
         answerString = answerString.trimmingCharacters(in: .newlines)

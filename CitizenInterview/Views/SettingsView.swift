@@ -12,6 +12,7 @@ struct SettingsView: View {
     @Binding var isAbove65: Bool
     @Binding var selectedState: AmericanState
     @Binding var overrideWithProvidedState: Bool
+    @Binding var shouldFetchOnAppear: Bool
 
     @State var showAllQuestionsList: Bool
     @State var answerModel: DynamicAnswerResultsModel?
@@ -22,13 +23,15 @@ struct SettingsView: View {
          isAbove65: Binding<Bool>,
          locationManager: LocationManager,
          selectedState: Binding<AmericanState>,
-         overrideWithProvidedState: Binding<Bool>)
+         overrideWithProvidedState: Binding<Bool>,
+         shouldFetchOnAppear: Binding<Bool>)
     {
         self._orderedQuestionsUnranked = orderedQuestionsUnranked
         self._isAbove65 = isAbove65
         self._showAllQuestionsList = State(initialValue: false)
         self._selectedState = selectedState
         self._overrideWithProvidedState = overrideWithProvidedState
+        self._shouldFetchOnAppear = shouldFetchOnAppear
         self.locationManager = locationManager
     }
 
@@ -61,6 +64,7 @@ struct SettingsView: View {
                 .padding(EdgeInsets(top: 0, leading: 0, bottom: 8, trailing: 0))
                 .onChange(of: overrideWithProvidedState) { _ in
                     if !overrideWithProvidedState {
+                        shouldFetchOnAppear = true
                         locationManager.removeOverridenStateObject()
                     }
                     UserDefaults.standard.set(overrideWithProvidedState, forKey: "settings_override_with_provided_state")
@@ -102,6 +106,7 @@ struct SettingsView: View {
                             Text("Show All")
                         }
                     }
+                    .allowsHitTesting(!isLoading)
                     .buttonStyle(.bordered)
                 }
 

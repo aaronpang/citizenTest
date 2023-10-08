@@ -19,6 +19,7 @@ struct MainMenuView: View {
     @State private var isLoading: Bool = false
     @State private var locationEnabled = false
     @State private var answerModel: DynamicAnswerResultsModel?
+    @State private var shouldFetchOnAppear: Bool = true
 
     // Settings
     @State private var isAbove65 = false
@@ -48,10 +49,28 @@ struct MainMenuView: View {
                         .fixedSize(horizontal: false, vertical: true)
                         .padding()
                     Spacer().frame(maxHeight: .infinity)
-                    Text(String(format: "Current location: %@", locationManager.shortenedLocation))
+                    if locationManager.isFetchingLocation {
+                        HStack {
+                            Text(String(format: "Fetching current location"))
+                                .font(.caption2)
+                                .foregroundStyle(.gray)
+                            ProgressView()
+                                .scaleEffect(0.8)
+                                .padding(.leading, 1)
+                        }
+                        .padding(.horizontal)
+                        .padding(.bottom, 2)
+                    } else if overrideWithProvidedState {
+                        Text(String(format: "Overriding current location with state in Settings."))
+                            .font(.caption2)
+                            .foregroundStyle(.gray)
+                            .padding(.leading)
+                            .padding(.bottom, 2)
+                    }
+                    Text(String(format: "Using location: %@", locationManager.shortenedLocation))
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .font(.caption)
-                        .padding()
+                        .padding(.bottom)
+                        .padding(.horizontal)
                 } else if locationManager.authorization == .notDetermined {
                     VStack(alignment: .leading) {
                         Text(String(format: "Please accept location access so we can provide to you the most accurate information for your studies. If none provided, we default to '%@'", selectedState.rawValue.capitalized))
@@ -110,6 +129,7 @@ struct MainMenuView: View {
                 .frame(alignment: .bottom)
                 .padding(.horizontal)
                 .padding(.bottom)
+                .allowsHitTesting(!isLoading)
                 Button {
                     showChecklist.toggle()
                 } label: {
@@ -129,7 +149,8 @@ struct MainMenuView: View {
                              isAbove65: $isAbove65,
                              locationManager: locationManager,
                              selectedState: $selectedState,
-                             overrideWithProvidedState: $overrideWithProvidedState)
+                             overrideWithProvidedState: $overrideWithProvidedState,
+                             shouldFetchOnAppear: $shouldFetchOnAppear)
             }
             .navigationDestination(isPresented: $showChecklist) {
                 ChecklistView()
@@ -144,38 +165,40 @@ struct MainMenuView: View {
             }
             .padding()
             .onAppear {
-                // Fetch latest settings
-                isAbove65 = UserDefaults.standard.bool(forKey: "settings_is_above_65")
-                overrideWithProvidedState = UserDefaults.standard.bool(forKey: "settings_override_with_provided_state")
-                orderedQuestionsUnranked = UserDefaults.standard.bool(forKey: "settings_order_question_unranked")
-                if let storedAmericanStateString = UserDefaults.standard.string(forKey: "settings_american_state"),
-                   let americanState = AmericanState(rawValue: storedAmericanStateString)
-                {
-                    selectedState = americanState
-                }
+                if shouldFetchOnAppear {
+                    // Don't fetch on appear if we've already fetched
+                    shouldFetchOnAppear = false
+                    // Fetch latest settings
+                    isAbove65 = UserDefaults.standard.bool(forKey: "settings_is_above_65")
+                    overrideWithProvidedState = UserDefaults.standard.bool(forKey: "settings_override_with_provided_state")
+                    orderedQuestionsUnranked = UserDefaults.standard.bool(forKey: "settings_order_question_unranked")
+                    if let storedAmericanStateString = UserDefaults.standard.string(forKey: "settings_american_state"),
+                       let americanState = AmericanState(rawValue: storedAmericanStateString)
+                    {
+                        selectedState = americanState
+                    }
 
-                // Check if location is enabled on appear
-                // Depending on permissions, show different UIs (request button, address, or state picker)
-                switch locationManager.manager.authorizationStatus {
-                case .notDetermined: break
-                // Show authorization button
-                case .denied: break
-                case .restricted: break
-                case .authorizedAlways:
-                    // Ignore any location updates if we have an overriden location
-                    if overrideWithProvidedState {
-                        locationManager.replaceLocationWithBackupState(backupState: selectedState)
-                    } else {
-                        locationManager.manager.requestLocation()
+                    let location = UserDefaults.standard.dictionary(forKey: "cached_location")?["location"] as? String
+                    let zipCode = UserDefaults.standard.dictionary(forKey: "cached_location")?["zip_code"] as? String
+                    let state = UserDefaults.standard.dictionary(forKey: "cached_location")?["state"] as? String
+                    let shortenedLocation = UserDefaults.standard.dictionary(forKey: "cached_location")?["shortened_location"] as? String
+
+                    locationManager.location = location ?? ""
+                    locationManager.zipCode = zipCode ?? ""
+                    locationManager.state = state ?? ""
+                    locationManager.shortenedLocation = shortenedLocation ?? ""
+
+                    // Fetch the latest location data on appear (only once though)
+                    if locationManager.manager.authorizationStatus == .authorizedAlways
+                        || locationManager.manager.authorizationStatus == .authorizedWhenInUse
+                    {
+                        if overrideWithProvidedState {
+                            locationManager.replaceLocationWithBackupState(backupState: selectedState)
+                        } else {
+                            locationManager.isFetchingLocation = true
+                            locationManager.manager.requestLocation()
+                        }
                     }
-                case .authorizedWhenInUse:
-                    if overrideWithProvidedState {
-                        locationManager.replaceLocationWithBackupState(backupState: selectedState)
-                    } else {
-                        locationManager.manager.requestLocation()
-                    }
-                @unknown default:
-                    break
                 }
             }
         }
@@ -188,6 +211,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var zipCode: String = ""
     @Published var authorization: CLAuthorizationStatus = .notDetermined
     @Published var shortenedLocation: String = ""
+    @Published var isFetchingLocation = false
     private var overridenStateObject: StateModel?
 
     var manager = {
@@ -217,6 +241,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             if let error = error {
                 print(error)
             }
+            self.isFetchingLocation = false
 
             // 2
             guard let placemark = placemarks?.first else { return }
@@ -233,6 +258,12 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             self.zipCode = zipCode
             self.location = "\(streetNumber ?? "")\(streetName ?? "")\n\(city), \(state) \(zipCode)"
             self.shortenedLocation = "\(city), \(state)"
+            UserDefaults.standard.set(
+                ["location": self.location,
+                 "zip_code": zipCode,
+                 "state": state,
+                 "shortened_location": self.shortenedLocation],
+                forKey: "cached_location")
         }
     }
 

@@ -34,14 +34,22 @@ struct FlashcardView: View {
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
-                Text(String(format: "Question #%d", questions[questionCounter].question_id)).fontWeight(.bold)
-                Text(question).padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
+                Text(String(format: "Question #%d", questions[questionCounter].question_id))
+                    .font(.title2)
+                    .bold()
+                Text(question)
+                    .padding(.bottom)
+                    .font(.title3)
                 if showAnswer {
-                    Text(String("Answer")).fontWeight(.bold)
+                    Text(String("Answer"))
+                        .font(.title2)
+                        .bold()
                     ScrollView {
                         VStack(alignment: .leading) {
                             Text(answer)
-                        }.frame(maxWidth: .infinity, alignment: .leading)
+                                .font(.title3)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
             }.frame(maxHeight: .infinity, alignment: .top)
@@ -56,6 +64,10 @@ struct FlashcardView: View {
                 .frame(alignment: .bottom)
                 .padding(.bottom)
             } else {
+//                let alert = Alert(title: Text("Completed 100 questions"),
+//                                  message: "You have completed all 100 questions, we will now show questions you've seen before again.",
+//                                  primary)
+
                 HStack {
                     Button {
                         QuestionManager.updateQuestionScore(questionID: questions[questionCounter].question_id, scoreDifference: -1)
@@ -98,7 +110,7 @@ struct FlashcardView: View {
         .frame(maxWidth: .infinity, // Full Screen Width
                maxHeight: .infinity, // Full Screen Height
                alignment: .topLeading)
-        .navigationBarTitle(Text("Quiz Flashcards"))
+        .navigationBarTitle(Text("Civic Questions"))
         .onAppear {
             questions = QuestionManager.getQuestionOrderedByScore(showOnly65AboveQuestions: isAbove65, orderedQuestionsUnranked: orderedQuestionsUnranked)
             questionCounter = 0
@@ -118,6 +130,17 @@ struct FlashcardView: View {
         questionCounter += 1
         // If we go through all the questions, then get the new list of sorted questions and start again
         if questionCounter >= questions.count {
+            // Show alert dialog
+            if !UserDefaults.standard.bool(forKey: "alert_when_hit_100") {
+//                let dontShowAction = UIAlertAction(title: "Don't show this again", style: .default) { _ in
+//                    UserDefaults.standard.set(true, forKey: "alert_when_hit_100")
+//                }
+//                let cancelAction = UIAlertAction(title: "Okay", style: .cancel)
+//                let alertController = UIAlertController(title: "Completed 100 questions", message: "You have completed all 100 questions, we will now show questions you've seen before again.", preferredStyle: .alert)
+//                alertController.addAction(cancelAction)
+//                alertController.addAction(dontShowAction)
+//                alertController.show(self, sender: nil)
+            }
             questions = QuestionManager.getQuestionOrderedByScore(showOnly65AboveQuestions: isAbove65, orderedQuestionsUnranked: orderedQuestionsUnranked)
             questionCounter = 0
         }

@@ -18,6 +18,38 @@
             endingLineNumber = "25"
             landmarkName = "parseQuestionsJSON()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B8F1E4E7-85C9-426D-8991-48F243C80D69 - 849cc410c552ff87"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static CitizenInterview.JSONParser.parseQuestionsJSON() -&gt; Swift.Optional&lt;Swift.Array&lt;CitizenInterview.QuestionModel&gt;&gt;"
+                  moduleName = "CitizenInterview"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aaronpang/Desktop/CitizenInterview/CitizenInterview/Parsers/JSONParser.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "2016">
+               </Location>
+               <Location
+                  uuid = "B8F1E4E7-85C9-426D-8991-48F243C80D69 - 849cc410c552ff87"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static CitizenInterview.JSONParser.parseQuestionsJSON() -&gt; Swift.Optional&lt;Swift.Array&lt;CitizenInterview.QuestionModel&gt;&gt;"
+                  moduleName = "CitizenInterview"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aaronpang/Desktop/CitizenInterview/CitizenInterview/Parsers/JSONParser.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "2044">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -34,6 +66,38 @@
             endingLineNumber = "20"
             landmarkName = "parseQuestionsJSON()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B82F1891-E008-426F-8A11-0EE11FB94747 - 849cc410c552fc22"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static CitizenInterview.JSONParser.parseQuestionsJSON() -&gt; Swift.Optional&lt;Swift.Array&lt;CitizenInterview.QuestionModel&gt;&gt;"
+                  moduleName = "CitizenInterview"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aaronpang/Desktop/CitizenInterview/CitizenInterview/Parsers/JSONParser.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "1576">
+               </Location>
+               <Location
+                  uuid = "B82F1891-E008-426F-8A11-0EE11FB94747 - 849cc410c552fc22"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static CitizenInterview.JSONParser.parseQuestionsJSON() -&gt; Swift.Optional&lt;Swift.Array&lt;CitizenInterview.QuestionModel&gt;&gt;"
+                  moduleName = "CitizenInterview"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/aaronpang/Desktop/CitizenInterview/CitizenInterview/Parsers/JSONParser.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "1604">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
