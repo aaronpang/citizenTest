@@ -11,6 +11,7 @@ struct FlashcardView: View {
     @State private var showAnswer = false
     @State private var question = ""
     @State private var answer = ""
+    @State private var showAlert: Bool = false
 
     @State private var questionCounter = 0
     @State private var shuffleQuestionsAlreadySeen: Set<Int> = []
@@ -64,10 +65,6 @@ struct FlashcardView: View {
                 .frame(alignment: .bottom)
                 .padding(.bottom)
             } else {
-//                let alert = Alert(title: Text("Completed 100 questions"),
-//                                  message: "You have completed all 100 questions, we will now show questions you've seen before again.",
-//                                  primary)
-
                 HStack {
                     Button {
                         QuestionManager.updateQuestionScore(questionID: questions[questionCounter].question_id, scoreDifference: -1)
@@ -116,6 +113,14 @@ struct FlashcardView: View {
             questionCounter = 0
             updateQuestionAndAnswer()
         }
+        .alert("Completed all 100 questions", isPresented: $showAlert) {
+            Button("Don't show this again") {
+                UserDefaults.standard.set(true, forKey: "alert_when_hit_100")
+            }
+            Button("Okay", role: .cancel) {}
+        } message: {
+            Text("You have completed all 100 questions, we will now show questions you've seen before again/")
+        }
     }
 
     func updateQuestionAndAnswer() {
@@ -132,14 +137,7 @@ struct FlashcardView: View {
         if questionCounter >= questions.count {
             // Show alert dialog
             if !UserDefaults.standard.bool(forKey: "alert_when_hit_100") {
-//                let dontShowAction = UIAlertAction(title: "Don't show this again", style: .default) { _ in
-//                    UserDefaults.standard.set(true, forKey: "alert_when_hit_100")
-//                }
-//                let cancelAction = UIAlertAction(title: "Okay", style: .cancel)
-//                let alertController = UIAlertController(title: "Completed 100 questions", message: "You have completed all 100 questions, we will now show questions you've seen before again.", preferredStyle: .alert)
-//                alertController.addAction(cancelAction)
-//                alertController.addAction(dontShowAction)
-//                alertController.show(self, sender: nil)
+                showAlert = true
             }
             questions = QuestionManager.getQuestionOrderedByScore(showOnly65AboveQuestions: isAbove65, orderedQuestionsUnranked: orderedQuestionsUnranked)
             questionCounter = 0
