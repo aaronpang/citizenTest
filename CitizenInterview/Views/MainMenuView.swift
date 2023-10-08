@@ -38,12 +38,12 @@ struct MainMenuView: View {
                         .resizable()
                         .frame(width: imageSize, height: imageSize, alignment: .center)
                         .clipShape(.circle)
-                    Text("This is an unofficial app that can help you prepare for the Civics portion of the USCIS naturalization interview.")
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(.horizontal)
-                        .padding(.top)
                 }
                 .frame(maxWidth: .infinity)
+                Text("This is an unofficial app that can help you prepare for the Civics portion of the USCIS naturalization interview.")
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.horizontal)
+                    .padding(.top)
                 if locationManager.authorization == .authorizedAlways || locationManager.authorization == .authorizedWhenInUse {
                     Text("It is absolutely free of charge and built with love and care ❤️.")
                         .fixedSize(horizontal: false, vertical: true)
@@ -73,7 +73,7 @@ struct MainMenuView: View {
                         .padding(.horizontal)
                 } else if locationManager.authorization == .notDetermined {
                     VStack(alignment: .leading) {
-                        Text(String(format: "Please accept location access so we can provide to you the most accurate information for your studies. If none provided, we default to '%@'", selectedState.rawValue.capitalized))
+                        Text(String(format: "Please accept location access so we can provide to you with accurate civic information. If none, we default to '%@'", selectedState.rawValue.capitalized))
                             .fixedSize(horizontal: false, vertical: true)
 
                         Button {

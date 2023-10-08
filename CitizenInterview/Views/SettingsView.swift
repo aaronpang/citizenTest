@@ -87,15 +87,13 @@ struct SettingsView: View {
                     VStack(alignment: .leading) {
                         Text("Show all questions with answers")
                         Text("View all the questions in order with all the answers without doing the quiz.").font(.subheadline).foregroundStyle(.secondary)
-                    }
+                    }.frame(maxWidth: .infinity)
                     Button {
                         isLoading = true
                         QuestionManager.fetchData(locationManager: locationManager,
-                                                  completion: { dynamicAnswers, error in
+                                                  completion: { dynamicAnswers, _ in
                                                       isLoading = false
-                                                      if let error = error {
-                                                          // TODO: Error fetching
-                                                      }
+                                                      // TODO: Error fetching
                                                       answerModel = dynamicAnswers
                                                       showAllQuestionsList.toggle()
                                                   })
