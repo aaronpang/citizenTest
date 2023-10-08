@@ -13,7 +13,8 @@ struct FlashcardView: View {
     @State private var answer = ""
     @State private var showAlert: Bool = false
 
-    @State private var questionCounter = 0
+    @State private var questionIndex = 0
+    @State private var questionsAnsweredCorrectly: [Int] = []
     @State private var shuffleQuestionsAlreadySeen: Set<Int> = []
     @State private var questionsSeenOrdered: [Int] = []
 
@@ -27,7 +28,7 @@ struct FlashcardView: View {
         self._isAbove65 = isAbove65
         self._orderedQuestionsUnranked = orderedQuestionsUnranked
         self._questions = State(initialValue: QuestionManager.getQuestionOrderedByScore(showOnly65AboveQuestions: isAbove65.wrappedValue, orderedQuestionsUnranked: orderedQuestionsUnranked.wrappedValue))
-        let initialQuestion = questions[questionCounter]
+        let initialQuestion = questions[questionIndex]
         self._question = State(initialValue: initialQuestion.question)
         self._answer = State(initialValue: DynamicAnswerParser.parseAnswersIntoString(answers: initialQuestion.answers, answerModel: answerModel.wrappedValue))
     }
@@ -35,7 +36,7 @@ struct FlashcardView: View {
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
-                Text(String(format: "Question #%d", questions[questionCounter].question_id))
+                Text(String(format: "Question #%d", questions[questionIndex].question_id))
                     .font(.title2)
                     .bold()
                 Text(question)
@@ -54,6 +55,7 @@ struct FlashcardView: View {
                     }
                 }
             }.frame(maxHeight: .infinity, alignment: .top)
+            Text(String(format: "Score: %d/%d", questionsAnsweredCorrectly.count, questionsSeenOrdered.count))
             if !showAnswer {
                 Button {
                     showAnswer = true
@@ -67,7 +69,7 @@ struct FlashcardView: View {
             } else {
                 HStack {
                     Button {
-                        QuestionManager.updateQuestionScore(questionID: questions[questionCounter].question_id, scoreDifference: -1)
+                        QuestionManager.updateQuestionScore(questionID: questions[questionIndex].question_id, scoreDifference: -1)
                         showNextQuestion()
                     } label: {
                         Text("Got it Wrong")
@@ -77,8 +79,9 @@ struct FlashcardView: View {
                     .frame(alignment: .bottom)
                     .tint(Color.red)
                     Button {
-                        QuestionManager.updateQuestionScore(questionID: questions[questionCounter].question_id, scoreDifference: 1)
+                        QuestionManager.updateQuestionScore(questionID: questions[questionIndex].question_id, scoreDifference: 1)
                         showNextQuestion()
+                        questionsAnsweredCorrectly.append(questions[questionIndex].question_id)
                     } label: {
                         Text("Got it Right")
                             .frame(maxWidth: .infinity, minHeight: 40)
@@ -90,9 +93,13 @@ struct FlashcardView: View {
                 .padding(.bottom)
             }
             Button {
-                guard let previousQuestion = questionsSeenOrdered.last else { return }
+                guard let previousQuestionIndex = questionsSeenOrdered.last else { return }
+                // Check if we answered the last question correctly, if so, remove it from the array
+                if questionsAnsweredCorrectly.last == questions[questionIndex].question_id {
+                    questionsAnsweredCorrectly.removeLast()
+                }
                 showAnswer = false
-                questionCounter = previousQuestion
+                questionIndex = previousQuestionIndex
                 questionsSeenOrdered.removeLast()
                 updateQuestionAndAnswer()
             } label: {
@@ -110,7 +117,7 @@ struct FlashcardView: View {
         .navigationBarTitle(Text("Civic Questions"))
         .onAppear {
             questions = QuestionManager.getQuestionOrderedByScore(showOnly65AboveQuestions: isAbove65, orderedQuestionsUnranked: orderedQuestionsUnranked)
-            questionCounter = 0
+            questionIndex = 0
             updateQuestionAndAnswer()
         }
         .alert("Completed all 100 questions", isPresented: $showAlert) {
@@ -124,23 +131,23 @@ struct FlashcardView: View {
     }
 
     func updateQuestionAndAnswer() {
-        question = questions[questionCounter].question
-        answer = DynamicAnswerParser.parseAnswersIntoString(answers: questions[questionCounter].answers, answerModel: answerModel)
+        question = questions[questionIndex].question
+        answer = DynamicAnswerParser.parseAnswersIntoString(answers: questions[questionIndex].answers, answerModel: answerModel)
     }
 
     func showNextQuestion() {
-        questionsSeenOrdered.append(questionCounter)
+        questionsSeenOrdered.append(questionIndex)
         showAnswer = false
-        shuffleQuestionsAlreadySeen.insert(questionCounter)
-        questionCounter += 1
+        shuffleQuestionsAlreadySeen.insert(questionIndex)
+        questionIndex += 1
         // If we go through all the questions, then get the new list of sorted questions and start again
-        if questionCounter >= questions.count {
+        if questionIndex >= questions.count {
             // Show alert dialog
             if !UserDefaults.standard.bool(forKey: "alert_when_hit_100") {
                 showAlert = true
             }
             questions = QuestionManager.getQuestionOrderedByScore(showOnly65AboveQuestions: isAbove65, orderedQuestionsUnranked: orderedQuestionsUnranked)
-            questionCounter = 0
+            questionIndex = 0
         }
         updateQuestionAndAnswer()
     }
