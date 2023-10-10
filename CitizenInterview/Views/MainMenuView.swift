@@ -30,7 +30,7 @@ struct MainMenuView: View {
     @StateObject var locationManager = LocationManager()
 
     var body: some View {
-        let imageSize = UIScreen.main.bounds.size.width / 2
+        let imageSize = min(UIScreen.main.bounds.size.width / 2, 200)
         NavigationStack {
             VStack(alignment: .leading) {
                 VStack(alignment: .center) {

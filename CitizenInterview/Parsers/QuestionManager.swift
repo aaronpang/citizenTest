@@ -102,7 +102,7 @@ class QuestionManager {
                 sortedQuestionToReturn = sortedQuestions
             } else {
                 // If we don't have any questions stored, then simply randomize all the questions
-                sortedQuestionToReturn = questions.shuffled()   
+                sortedQuestionToReturn = questions.shuffled()
             }
         }
         // Filter out only the questions that are for above age 65

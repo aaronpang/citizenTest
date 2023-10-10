@@ -159,11 +159,11 @@
 		E38047B52ACE7B7A00A88FE2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E3015DE02AACF26600D574BD /* MainMenuView.swift */,
 				E3698F752A985F8E0079B60E /* FlashcardView.swift */,
 				E35BE0D32AC1325500C6FA84 /* AboutView.swift */,
 				E3DDE1C82AC686EC0071511B /* SettingsView.swift */,
 				E3DDE1CA2AC907B00071511B /* AllQuestionsView.swift */,
-				E3015DE02AACF26600D574BD /* MainMenuView.swift */,
 				E38047B82ACFC2AC00A88FE2 /* ChecklistView.swift */,
 			);
 			path = Views;
@@ -519,7 +519,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.pangogames.CitizenInterview;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pangoapps.CitizenInterview;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -551,7 +551,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.pangogames.CitizenInterview;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pangoapps.CitizenInterview;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
