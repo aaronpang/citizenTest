@@ -87,7 +87,8 @@ struct SettingsView: View {
                     VStack(alignment: .leading) {
                         Text("Show all questions with answers")
                         Text("View all the questions in order with all the answers without doing the quiz.").font(.subheadline).foregroundStyle(.secondary)
-                    }.frame(maxWidth: .infinity)
+                    }
+                    Spacer()
                     Button {
                         isLoading = true
                         QuestionManager.fetchData(locationManager: locationManager,
@@ -106,7 +107,7 @@ struct SettingsView: View {
                     }
                     .allowsHitTesting(!isLoading)
                     .buttonStyle(.bordered)
-                }
+                }.frame(maxWidth: .infinity)
 
             }.padding()
         }

@@ -81,27 +81,30 @@ class QuestionManager {
         }
         let userDefaults = UserDefaults.standard
         // If we are going to show the questions ordered and unranked then don't even pull the question scores
-        if !orderedQuestionsUnranked, let questionScoreDict = userDefaults.object(forKey: "questions") as? [NSString: NSNumber] {
-            // Convert it to Int : Int
-            var convertedQuestionScoreDict: [Int: Int] = [:]
-            for questionScore in questionScoreDict {
-                convertedQuestionScoreDict[questionScore.key.integerValue] = questionScore.value.intValue
-            }
-            let questionSortedDict = convertedQuestionScoreDict.sorted(by: { $0.value < $1.value })
-            var sortedQuestions: [QuestionModel] = []
-            // This is now ordered by lowest scoring question to highest scoring question
-            for questionID in questionSortedDict {
-                // Create the question model list based on this new ordering
-                if let questionModel = questionIDToQuestionModel[questionID.key] {
-                    sortedQuestions.append(questionModel)
-                }
-            }
-            sortedQuestionToReturn = sortedQuestions
-        } else {
-            // Assume all questions have score of 0 so just return the questions ordered
+        if orderedQuestionsUnranked {
             sortedQuestionToReturn = questions
+        } else {
+            if let questionScoreDict = userDefaults.object(forKey: "questions") as? [NSString: NSNumber] {
+                // Convert it to Int : Int
+                var convertedQuestionScoreDict: [Int: Int] = [:]
+                for questionScore in questionScoreDict {
+                    convertedQuestionScoreDict[questionScore.key.integerValue] = questionScore.value.intValue
+                }
+                let questionSortedDict = convertedQuestionScoreDict.sorted(by: { $0.value < $1.value })
+                var sortedQuestions: [QuestionModel] = []
+                // This is now ordered by lowest scoring question to highest scoring question
+                for questionID in questionSortedDict {
+                    // Create the question model list based on this new ordering
+                    if let questionModel = questionIDToQuestionModel[questionID.key] {
+                        sortedQuestions.append(questionModel)
+                    }
+                }
+                sortedQuestionToReturn = sortedQuestions
+            } else {
+                // If we don't have any questions stored, then simply randomize all the questions
+                sortedQuestionToReturn = questions.shuffled()   
+            }
         }
-
         // Filter out only the questions that are for above age 65
         if showOnly65AboveQuestions {
             return sortedQuestionToReturn.filter { questionModel in
