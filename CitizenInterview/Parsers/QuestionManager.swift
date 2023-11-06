@@ -41,6 +41,11 @@ struct RepresentativesResult: Decodable {
 class QuestionManager {
     static let questions: [QuestionModel]? = JSONParser.parseQuestionsJSON()
     static let defaultErrorString = "Unable to retrieve information. Please search this online"
+    enum Constants {
+        static let speakerOfTheHouse = "Mike Johnson"
+        static let numberOfSupremeCourtJustices = 9
+        static let chiefJustice = "John Roberts"
+    }
 
     class func updateQuestionScore(questionID: Int, scoreDifference: Int) {
         let userDefaults = UserDefaults.standard
@@ -179,9 +184,9 @@ class QuestionManager {
                                                         vicePresident: vicePresident,
                                                         governor: governor,
                                                         capital: capital,
-                                                        speakerOfHouse: "Patrick McHenry",
-                                                        numberOfSupremeCourtJustices: 9,
-                                                        chiefJustice: "John Roberts") // Don't hard code these
+                                                        speakerOfHouse: Constants.speakerOfTheHouse,
+                                                        numberOfSupremeCourtJustices: Constants.numberOfSupremeCourtJustices,
+                                                        chiefJustice: Constants.chiefJustice)
                 // Cache the information per zip code with a timeout of 2 months so we don't fetch every time the user taps on Begin Quiz
                 let time = Int(NSDate().timeIntervalSince1970)
                 let modelStore = DynamicAnswerResultsModelStore(answers: answers, timeStored: time)
@@ -202,9 +207,9 @@ class QuestionManager {
                                                         vicePresident: QuestionManager.defaultErrorString,
                                                         governor: QuestionManager.defaultErrorString,
                                                         capital: capital,
-                                                        speakerOfHouse: "Patrick McHenry",
-                                                        numberOfSupremeCourtJustices: 9,
-                                                        chiefJustice: "John Roberts") // Don't hard code these
+                                                        speakerOfHouse: Constants.speakerOfTheHouse,
+                                                        numberOfSupremeCourtJustices: Constants.numberOfSupremeCourtJustices,
+                                                        chiefJustice: Constants.chiefJustice)
 
                 completion(answers, error)
             }

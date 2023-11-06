@@ -228,6 +228,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         authorization = manager.authorizationStatus
         // Don't request location if we're overriding the state
         if overridenStateObject == nil && (authorization == .authorizedWhenInUse || authorization == .authorizedAlways) {
+            isFetchingLocation = true
             manager.requestLocation()
         }
     }
